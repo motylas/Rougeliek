@@ -17,6 +17,11 @@ public class Room : MonoBehaviour
     [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private Enemy[] enemies;
     [SerializeField] private Transform enemiesContainer;
+    [SerializeField] private Tilemap rocksTilemap;
+    [SerializeField] private TileBase[] rocksTiles;
+    [SerializeField] private Transform firstCellTransform;
+    [SerializeField] private int gridWidth, gridHeight;
+    [SerializeField] private float perlinNoiseScale = 20f;
     private GameManager.RoomType _roomType;
     private Camera _camera;
     private bool _visited;
@@ -48,6 +53,70 @@ public class Room : MonoBehaviour
         {
             rightWallC.enabled = true;
             rightDoor.enabled = false;
+        }
+
+        GenerateObstacles();
+    }
+
+    private void GenerateObstacles()
+    {
+        var tilesGrid = new bool[gridHeight, gridWidth];
+        var startingCell = rocksTilemap.WorldToCell(firstCellTransform.position);
+        var startingX = startingCell.x;
+        var offsetX = MyUtils.RandomFloat(0f, 99999f);
+        var offsetY = MyUtils.RandomFloat(0f, 99999f);
+        var currentCell = startingCell;
+        for (var i = 1; i < gridHeight-1; i++)
+        {
+            for (var j = 1; j < gridWidth-1; j++)
+            {
+                var sample = PerlinNoise(i,j, offsetX, offsetY);
+                if (sample > 0.75f)
+                {
+                    rocksTilemap.SetTile(currentCell, rocksTiles[MyUtils.Random.Next(1)+1]);
+                    tilesGrid[i, j] = true;
+                }
+                currentCell.x++;
+            }
+            currentCell.x = startingX;
+            currentCell.y--;
+        }
+        // RepairArea(startingCell, tilesGrid);
+    }
+
+    private float PerlinNoise(int x, int y, float offsetX, float offsetY)
+    {
+        var xCoord = (float) x / gridWidth * perlinNoiseScale + offsetX;
+        var yCoord = (float) y / gridHeight * perlinNoiseScale + offsetY;
+        return Mathf.PerlinNoise(xCoord, yCoord);
+    }
+
+    private void RepairArea(Vector3Int currentCell, bool[,] tilesGrid)
+    {
+        var startingX = currentCell.x;
+        for (var i = 0; i < gridHeight; i++)
+        {
+            for (var j = 0; j < gridWidth; j++)
+            {
+                if (tilesGrid[i, j]) continue;
+                if (i != 0 && !tilesGrid[i - 1, j]) continue;
+                if (i != gridHeight - 1 && !tilesGrid[i + 1, j]) continue;
+                if (j != 0 && !tilesGrid[i, j - 1]) continue;
+                if (j != gridWidth - 1 && !tilesGrid[i, j + 1]) continue;
+                if (i != gridHeight - 1)
+                {
+                    rocksTilemap.SetTile(currentCell + Vector3Int.down, null);
+                    tilesGrid[i+1, j] = false;
+                }
+                else
+                {
+                    rocksTilemap.SetTile(currentCell + Vector3Int.up, null);
+                    tilesGrid[i-1, j] = false;
+                }
+                currentCell.x++;
+            }
+            currentCell.x = startingX;
+            currentCell.y--;
         }
     }
 

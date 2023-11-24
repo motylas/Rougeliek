@@ -262,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95de3c82552d7744194b506b71606992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 40
+  healthPoints: 1
   idleState: {fileID: 0}
   attackState: {fileID: 0}
   moveState: {fileID: 0}

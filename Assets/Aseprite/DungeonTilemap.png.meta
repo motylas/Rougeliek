@@ -4640,7 +4640,7 @@ TextureImporter:
         width: 30
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4661,7 +4661,7 @@ TextureImporter:
         width: 30
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4682,7 +4682,7 @@ TextureImporter:
         width: 30
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4703,7 +4703,7 @@ TextureImporter:
         width: 30
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4724,7 +4724,7 @@ TextureImporter:
         width: 30
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4745,7 +4745,7 @@ TextureImporter:
         width: 30
         height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4753,6 +4753,69 @@ TextureImporter:
       bones: []
       spriteID: 97e6b64dded81684785bef130b417d95
       internalID: -1199666605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonTilemap_215
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 168
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3fabea65ae5a624983f889f21f3c93b
+      internalID: 508774995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonTilemap_216
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 168
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9fb8f6072dcdbe4499a71ecf238c322
+      internalID: 774398350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DungeonTilemap_217
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 168
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79dee81ee6add504a9972e6733ffc483
+      internalID: -768415124
       vertices: []
       indices: 
       edges: []
@@ -4780,7 +4843,7 @@ TextureImporter:
       DungeonTilemap_80: 1978555225
       DungeonTilemap_170: -198970449
       DungeonTilemap_20: -23595597
-      DungeonTilemap_126: 1904476891
+      DungeonTilemap_172: -1802847797
       DungeonTilemap_2: 1067654650
       DungeonTilemap_54: 635543172
       DungeonTilemap_110: -741481659
@@ -4908,6 +4971,7 @@ TextureImporter:
       DungeonTilemap_145: -596068877
       DungeonTilemap_21: -1901159489
       DungeonTilemap_91: -2085217550
+      DungeonTilemap_217: -768415124
       DungeonTilemap_64: -169521099
       DungeonTilemap_0: -794624642
       DungeonTilemap_163: -1760784343
@@ -4924,6 +4988,7 @@ TextureImporter:
       DungeonTilemap_78: 561735060
       DungeonTilemap_15: 1692752414
       DungeonTilemap_53: 1751932600
+      DungeonTilemap_215: 508774995
       DungeonTilemap_46: -405948136
       DungeonTilemap_89: -590739307
       DungeonTilemap_211: 848285928
@@ -4938,6 +5003,7 @@ TextureImporter:
       DungeonTilemap_199: 1497264300
       DungeonTilemap_120: 345944564
       DungeonTilemap_198: -1762604838
+      DungeonTilemap_216: 774398350
       DungeonTilemap_12: -677158977
       DungeonTilemap_137: -841357081
       door_0: -370958050
@@ -4988,7 +5054,7 @@ TextureImporter:
       DungeonTilemap_50: 371139938
       DungeonTilemap_131: 496192912
       DungeonTilemap_90: -305535906
-      DungeonTilemap_172: -1802847797
+      DungeonTilemap_126: 1904476891
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

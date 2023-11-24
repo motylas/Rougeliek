@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a96d8c4f6132a24e8d2bd235e557385, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 15
+  healthPoints: 1
   idleState: {fileID: 0}
   moveRandomState: {fileID: 0}
   movePlayerState: {fileID: 0}
