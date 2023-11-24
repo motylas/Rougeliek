@@ -54,8 +54,7 @@ public class Room : MonoBehaviour
             rightWallC.enabled = true;
             rightDoor.enabled = false;
         }
-
-        GenerateObstacles();
+        if (_roomType == GameManager.RoomType.Normal) GenerateObstacles();
     }
 
     private void GenerateObstacles()
@@ -66,6 +65,7 @@ public class Room : MonoBehaviour
         var offsetX = MyUtils.RandomFloat(0f, 99999f);
         var offsetY = MyUtils.RandomFloat(0f, 99999f);
         var currentCell = startingCell;
+        var rockTilesLength = rocksTiles.Length;
         for (var i = 1; i < gridHeight-1; i++)
         {
             for (var j = 1; j < gridWidth-1; j++)
@@ -73,7 +73,7 @@ public class Room : MonoBehaviour
                 var sample = PerlinNoise(i,j, offsetX, offsetY);
                 if (sample > 0.75f)
                 {
-                    rocksTilemap.SetTile(currentCell, rocksTiles[MyUtils.Random.Next(1)+1]);
+                    rocksTilemap.SetTile(currentCell, rocksTiles[MyUtils.Random.Next(rockTilesLength)]);
                     tilesGrid[i, j] = true;
                 }
                 currentCell.x++;
@@ -81,7 +81,9 @@ public class Room : MonoBehaviour
             currentCell.x = startingX;
             currentCell.y--;
         }
-        // RepairArea(startingCell, tilesGrid);
+        var unblockedTiles = new bool[gridHeight, gridWidth];
+        CheckForBlockedArea(tilesGrid, 0,0, unblockedTiles);
+        RepairArea(tilesGrid, unblockedTiles, startingCell);
     }
 
     private float PerlinNoise(int x, int y, float offsetX, float offsetY)
@@ -91,32 +93,29 @@ public class Room : MonoBehaviour
         return Mathf.PerlinNoise(xCoord, yCoord);
     }
 
-    private void RepairArea(Vector3Int currentCell, bool[,] tilesGrid)
+    private void CheckForBlockedArea(bool[,] tilesGrid, int x, int y, bool[,] unblockedTiles)
     {
-        var startingX = currentCell.x;
+        unblockedTiles[x, y] = true;
+        if (x != 0 && !tilesGrid[x - 1, y]  && !unblockedTiles[x-1,y]) CheckForBlockedArea(tilesGrid, x-1,y,unblockedTiles);
+        if (x != gridHeight - 1 && !tilesGrid[x + 1, y] && !unblockedTiles[x+1,y]) CheckForBlockedArea(tilesGrid, x+1,y,unblockedTiles);
+        if (y != 0 && !tilesGrid[x, y - 1] && !unblockedTiles[x,y-1]) CheckForBlockedArea(tilesGrid, x,y-1,unblockedTiles);
+        if (y != gridWidth - 1 && !tilesGrid[x, y + 1] && !unblockedTiles[x, y + 1]) CheckForBlockedArea(tilesGrid, x, y + 1, unblockedTiles);
+    }
+
+    private void RepairArea(bool[,] tilesGrid, bool[,] unlockedTiles, Vector3Int startingCell)
+    {
+        var rockTilesLength = rocksTiles.Length;
+        startingCell += Vector3Int.left + Vector3Int.up;
+        var startingX = startingCell.x;
         for (var i = 0; i < gridHeight; i++)
         {
             for (var j = 0; j < gridWidth; j++)
             {
-                if (tilesGrid[i, j]) continue;
-                if (i != 0 && !tilesGrid[i - 1, j]) continue;
-                if (i != gridHeight - 1 && !tilesGrid[i + 1, j]) continue;
-                if (j != 0 && !tilesGrid[i, j - 1]) continue;
-                if (j != gridWidth - 1 && !tilesGrid[i, j + 1]) continue;
-                if (i != gridHeight - 1)
-                {
-                    rocksTilemap.SetTile(currentCell + Vector3Int.down, null);
-                    tilesGrid[i+1, j] = false;
-                }
-                else
-                {
-                    rocksTilemap.SetTile(currentCell + Vector3Int.up, null);
-                    tilesGrid[i-1, j] = false;
-                }
-                currentCell.x++;
+                if (!tilesGrid[i,j] && !unlockedTiles[i,j]) rocksTilemap.SetTile(startingCell, rocksTiles[MyUtils.Random.Next(rockTilesLength)]);
+                startingCell.x++;
             }
-            currentCell.x = startingX;
-            currentCell.y--;
+            startingCell.x = startingX;
+            startingCell.y--;
         }
     }
 
