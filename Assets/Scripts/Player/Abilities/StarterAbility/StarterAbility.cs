@@ -11,7 +11,7 @@ public class StarterAbility : Ability
     
     private void Start()
     {
-        _mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        _mainCamera = Camera.main;
         _player = GameManager.Instance.player;
         _playerRb = _player.gameObject.GetComponent<Rigidbody2D>();
         _primarySpell = GameManager.Instance.spellsDict[GetType().Name].primarySpell;

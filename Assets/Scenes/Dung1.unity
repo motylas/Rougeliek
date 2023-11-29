@@ -131,16 +131,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 109753028, guid: 3fdf24a1d6333894b9eac61c86ecbdef, type: 3}
-      propertyPath: m_Enabled
-      value: 1
+      propertyPath: numberOfRooms
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3928052551031151753, guid: 3fdf24a1d6333894b9eac61c86ecbdef, type: 3}
       propertyPath: m_Name
       value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 3928052551031151754, guid: 3fdf24a1d6333894b9eac61c86ecbdef, type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3928052551031151755, guid: 3fdf24a1d6333894b9eac61c86ecbdef, type: 3}
       propertyPath: m_RootOrder
@@ -252,14 +248,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 431984560, guid: 0517941ed559a2f45b66c9f1f5c11881, type: 3}
-      propertyPath: m_Size.x
-      value: 0.8812518
-      objectReference: {fileID: 0}
-    - target: {fileID: 431984560, guid: 0517941ed559a2f45b66c9f1f5c11881, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.037515104
-      objectReference: {fileID: 0}
     - target: {fileID: 4252067481214999916, guid: 0517941ed559a2f45b66c9f1f5c11881, type: 3}
       propertyPath: m_RootOrder
       value: 2

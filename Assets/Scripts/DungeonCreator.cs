@@ -20,13 +20,14 @@ public class DungeonCreator : MonoBehaviour
 
     private void GenerateRoomsPositions()
     {
-        Vector2 currentPosition = Vector2.zero;
+        var currentPosition = Vector2.zero;
         _availablePositions.Add(currentPosition);
-        for (int i = 0; i < numberOfRooms; i++)
+        for (var i = 0; i < numberOfRooms; i++)
         {
             do
             {
-                currentPosition = _availablePositions[MyUtils.Random.Next(_availablePositions.Count)];
+                currentPosition = _availablePositions
+                    [MyUtils.Random.Next(_availablePositions.Count)];
                 _availablePositions.Remove(currentPosition);
             } while (_unavailablePositions.Contains(currentPosition));
 
@@ -75,8 +76,6 @@ public class DungeonCreator : MonoBehaviour
 
     private bool CheckDistance(Vector2 vec1, Vector2 vec2)
     {
-        // Debug.Log("VECTOR1" + vec1.x + " " + vec1.y);
-        // Debug.Log("VECTOR2" + vec2.x + " " + vec2.y);
         var dist1 = Mathf.Abs(vec1.x) + Mathf.Abs(vec1.y);
         var dist2 = Mathf.Abs(vec2.x) + Mathf.Abs(vec2.y);
         return (dist1 < dist2);
