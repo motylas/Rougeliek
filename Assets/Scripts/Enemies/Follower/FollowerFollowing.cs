@@ -28,6 +28,8 @@ namespace Follower
         private readonly List<RaycastHit2D> castResults = new();
         [SerializeField] private ContactFilter2D contactFilter2D;
         [SerializeField] private float radiusOffset;
+        private Coroutine _pathFind;
+        [SerializeField] private float chaseArea;
         
         private void Start()
         {
@@ -47,11 +49,12 @@ namespace Follower
 
         public override void OnEnterState()
         {
-            StartCoroutine(FindPathToPlayer());
+            _pathFind = StartCoroutine(FindPathToPlayer());
         }
 
         public override EnemyState OnUpdateState()
         {
+            if (Vector2.Distance(_player.transform.position, circleCollider2D.transform.position) > chaseArea) return _follower.searchingState;
             _moveDirection = (_player.transform.position - circleCollider2D.transform.position).normalized;
             var rayHit = Physics2D.CircleCast(circleCollider2D.transform.position, circleCollider2D.radius, _moveDirection, Mathf.Infinity, LayerMask.GetMask("WallBodyColl")|LayerMask.GetMask("Player"));
             if (rayHit.collider.CompareTag("Player"))
@@ -71,7 +74,17 @@ namespace Follower
 
         private IEnumerator FindPathToPlayer()
         {
-            yield return new WaitForSeconds(1.1f); //TODO delete after
+            while (true)
+            {
+                followPath = MyUtils.FindPath(circleCollider2D.transform.position, _player.wallCollider.position,
+                    circleCollider2D, contactFilter2D);
+                yield return new WaitForSeconds(0.02f);
+            }
+        }
+
+        private IEnumerator FindPathToPlayer2()
+        {
+            // yield return new WaitForSeconds(1.1f); //TODO delete after
             
             // Init
             var playerPos = _player.wallCollider.position;
@@ -79,13 +92,30 @@ namespace Follower
             var finalCell = _tilemap.WorldToCell(playerPos);
             var firstCellTransform = GameManager.Instance.currentRoom.firstCellTransform;
             var firstCell = _tilemap.WorldToCell(firstCellTransform.position);
+            Cell currentCell = null;
             List<Vector3Int> visitedNodes = new() { startingCell };
             var id = 0;
             
             nodesList = new SortedDictionary<CellID, Cell> { { new CellID(0f, id++), new Cell(startingCell, null, 0) } };
             while (true)
             {
-                var currentCell = nodesList.First().Value;
+                if (nodesList.Count == 0)
+                {
+                    if (currentCell != null) MakePath(currentCell);
+                    visitedNodes = new List<Vector3Int>();
+                    nodesList = new SortedDictionary<CellID, Cell>();
+                    playerPos = _player.wallCollider.position;
+                    startingCell = _tilemap.WorldToCell(circleCollider2D.transform.position);
+                    finalCell = _tilemap.WorldToCell(playerPos);
+                    id = 0;
+                    
+            
+                    nodesList.Add(new CellID(0f, id++), new Cell(startingCell, null, 0));
+                    yield return new WaitForSeconds(.05f);
+                    continue;
+                }
+                
+                currentCell = nodesList.First().Value;
                 var currentDistance = nodesList.First().Key;
                 nodesList.Remove(currentDistance);
                 
@@ -150,6 +180,7 @@ namespace Follower
                         visitedNodes.Add(up);
                 }
                 
+                // ReSharper disable once InvertIf
                 if (verticalGrid < _room.gridHeight-1 && !_tilemap.HasTile(down) && !visitedNodes.Contains(down))
                 {
                     nodesList.Add(
@@ -186,7 +217,7 @@ namespace Follower
             path.Reverse();
             
             List<Vector2> finalPath = new();
-            var id = 1;
+            int id;
             finalPath.Add(path[0]); // LEAVE IT
             
             for (id = path.Count-1; id > 0; id--)
@@ -209,12 +240,12 @@ namespace Follower
                 }
                 break;
             }
-
+        
             for (var i = id; i < path.Count; i++)
             {
                 finalPath.Add(path[i]);
             }
-
+        
             for (var i = 1; i < finalPath.Count; i++)
             {
                 Debug.DrawLine(finalPath[i-1], finalPath[i],Color.red, .05f);
@@ -228,11 +259,15 @@ namespace Follower
 
         public override void OnLeaveState()
         {
+            StopCoroutine(_pathFind);
+            var state = (FollowerSearch)_follower.searchingState;
+            state.playerLastSeen = _player.wallCollider.position;
         }
 
         private void OnDrawGizmos()
         {
-            // Gizmos.color = Color.red;
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, chaseArea);
             // Gizmos.DrawWireCube(box.transform.position + (Vector3)_moveDirection * collisionOffset, box.size);
             // Gizmos.DrawCube(transform.position + (Vector3)box.offset + (Vector3)_moveDirection * collisionOffset, box.size);
         }
