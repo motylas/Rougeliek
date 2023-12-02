@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -17,12 +19,14 @@ public class Room : MonoBehaviour
     [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private Enemy[] enemies;
     [SerializeField] private Transform enemiesContainer;
-    [SerializeField] private Tilemap rocksTilemap;
+    [SerializeField] public Tilemap rocksTilemap;
     [SerializeField] private TileBase[] rocksTiles;
-    [SerializeField] private Transform firstCellTransform;
-    [SerializeField] private int gridWidth, gridHeight;
+    [SerializeField] public Transform firstCellTransform;
+    [SerializeField] public int gridWidth, gridHeight;
     [SerializeField] private float perlinNoiseScale = 20f;
     private GameManager.RoomType _roomType;
+
+    public bool[,] obstaclesGrid;
     private Camera _camera;
     private bool _visited;
 
@@ -34,6 +38,7 @@ public class Room : MonoBehaviour
 
     private void OnRoomCreate()
     {
+        // GenerateObstacles();
         if (!_topRoom)
         {
             topWallC.enabled = true;
@@ -55,12 +60,16 @@ public class Room : MonoBehaviour
             rightDoor.enabled = false;
         }
         if (_roomType == GameManager.RoomType.Normal) GenerateObstacles();
+        if (_roomType == GameManager.RoomType.Starting) GameManager.Instance.currentRoom = this;
+        GameManager.Instance.currentRoom = this; //TODO delete this line after testing
     }
 
     private void GenerateObstacles()
     {
         var tilesGrid = new bool[gridHeight, gridWidth];
         var startingCell = rocksTilemap.WorldToCell(firstCellTransform.position);
+        startingCell.x++;
+        startingCell.y--;
         var startingX = startingCell.x;
         var offsetX = MyUtils.RandomFloat(0f, 99999f);
         var offsetY = MyUtils.RandomFloat(0f, 99999f);
@@ -71,7 +80,7 @@ public class Room : MonoBehaviour
             for (var j = 1; j < gridWidth-1; j++)
             {
                 var sample = PerlinNoise(i,j, offsetX, offsetY);
-                if (sample > 0.75f)
+                if (sample > 0.55f)
                 {
                     rocksTilemap.SetTile(currentCell, rocksTiles[MyUtils.Random.Next(rockTilesLength)]);
                     tilesGrid[i, j] = true;
@@ -84,6 +93,7 @@ public class Room : MonoBehaviour
         var unblockedTiles = new bool[gridHeight, gridWidth];
         CheckForBlockedArea(tilesGrid, 0,0, unblockedTiles);
         RepairArea(tilesGrid, unblockedTiles, startingCell);
+        obstaclesGrid = unblockedTiles;
     }
 
     private float PerlinNoise(int x, int y, float offsetX, float offsetY)

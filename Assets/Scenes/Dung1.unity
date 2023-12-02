@@ -130,10 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 109753028, guid: 3fdf24a1d6333894b9eac61c86ecbdef, type: 3}
-      propertyPath: numberOfRooms
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 3928052551031151753, guid: 3fdf24a1d6333894b9eac61c86ecbdef, type: 3}
       propertyPath: m_Name
       value: GameManager

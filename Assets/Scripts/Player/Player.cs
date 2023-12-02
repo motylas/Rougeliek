@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     private PlayerFight _playerFight;
     private PlayerMovement _playerMovement;
     public Transform fireTransform;
-    
+    public Transform wallCollider;
     
     void Start()
     {

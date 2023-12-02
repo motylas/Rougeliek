@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Player player;
+    public Room currentRoom;
     public DungeonCreator dungeonCreator;
     public int maxEnemies = 8;
     public int minEnemies = 5;
