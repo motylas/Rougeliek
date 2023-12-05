@@ -8,6 +8,8 @@ using Random = System.Random;
 public static class MyUtils
 {
     public static readonly Random Random = new();
+    
+    // Path Find
     private const float RadiusOffset = 0.02f;
     private static readonly List<RaycastHit2D> CastResults = new();
 
@@ -16,10 +18,43 @@ public static class MyUtils
         return (float)(Random.NextDouble() * (max - min) + min);
     }
 
-    public static List<Vector2> FindPath(Vector3 startPosition, Vector3 finalPosition, CircleCollider2D circleCollider2D, ContactFilter2D contactFilter2D)
+    public static Vector3 GetRandomPositionInRoom()
+    {
+        var currentRoom = GameManager.Instance.currentRoom;
+        if (currentRoom == null) return Vector3.one;
+        var tileMap = currentRoom.rocksTilemap;
+        var maxX = (float) currentRoom.gridWidth;
+        var maxY = (float) currentRoom.gridHeight;
+        var firstCell = currentRoom.firstCellTransform.position;
+        Vector3Int cellPosition;
+        do
+        {
+            var randomX = RandomFloat(firstCell.x, firstCell.x + maxX-1);
+            var randomY = RandomFloat(firstCell.y, firstCell.y - maxY+1);
+            var position = new Vector3(randomX, randomY);
+            cellPosition = tileMap.WorldToCell(position);
+        } while (tileMap.HasTile(cellPosition));
+
+        var returnPosition = tileMap.CellToWorld(cellPosition);
+        returnPosition.x += .5f;
+        returnPosition.y += .5f;
+
+        return returnPosition;
+    }
+
+    public static List<Vector2> FindPath(Vector3 startPosition, Vector3 finalPosition, CircleCollider2D circleCollider2D, ContactFilter2D contactFilter2D, Color color)
     {
         var currentRoom = GameManager.Instance.currentRoom;
         var tilemap = currentRoom.rocksTilemap;
+
+        // CHECK FOR ENEMIES
+        var enemiesList = GameManager.Instance.enemiesList;
+        var tilesBlockedByEnemies = new List<Vector3Int>();
+        foreach (var transform in enemiesList)
+        {
+            if (circleCollider2D.transform == transform) continue;
+            tilesBlockedByEnemies.Add(tilemap.WorldToCell(transform.position));
+        }
         
         var firstCellInRoom = tilemap.WorldToCell(currentRoom.firstCellTransform.position);
         var startingCell = tilemap.WorldToCell(startPosition);
@@ -27,17 +62,16 @@ public static class MyUtils
         
         List<Vector3Int> visitedNodes = new() { startingCell };
         var id = 0;
-        
-        Cell currentCell = null;
+
         var nodesList = new SortedDictionary<CellID, Cell> { { new CellID(0f, id++), new Cell(startingCell, null, 0) }};
         
         while (true)
         {
-            if (nodesList.Count == 0) return currentCell != null ? MakePath(currentCell, tilemap, circleCollider2D, contactFilter2D) : null;
-            currentCell = nodesList.First().Value;
+            if (nodesList.Count == 0) return null;
+            var currentCell = nodesList.First().Value;
             
             // If destination found, make new path and reset values
-            if (currentCell.position == finalCell) return MakePath(currentCell, tilemap, circleCollider2D, contactFilter2D);
+            if (currentCell.position == finalCell) return MakePath(currentCell, tilemap, circleCollider2D, contactFilter2D, color);
             
             // Get rest values
             var currentDistance = nodesList.First().Key;
@@ -60,7 +94,7 @@ public static class MyUtils
             var down = new Vector3Int(currentCell.position.x, currentCell.position.y-1);
         
         
-            if (horizontalGrid > 0 && !tilemap.HasTile(left) && !visitedNodes.Contains(left))
+            if (horizontalGrid > 0 && !tilemap.HasTile(left) && !visitedNodes.Contains(left) && !tilesBlockedByEnemies.Contains(left))
             {
                 nodesList.Add(
                     new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, tilemap.CellToWorld(left)), id++),
@@ -68,7 +102,7 @@ public static class MyUtils
                 visitedNodes.Add(left);
             }
                 
-            if (horizontalGrid < currentRoom.gridWidth-1 && !tilemap.HasTile(right) && !visitedNodes.Contains(right))
+            if (horizontalGrid < currentRoom.gridWidth-1 && !tilemap.HasTile(right) && !visitedNodes.Contains(right) && !tilesBlockedByEnemies.Contains(right))
             {
                 nodesList.Add(
                     new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, tilemap.CellToWorld(right)), id++),
@@ -76,7 +110,7 @@ public static class MyUtils
                 visitedNodes.Add(right);
             }
                 
-            if (verticalGrid > 0 && !tilemap.HasTile(up) && !visitedNodes.Contains(up))
+            if (verticalGrid > 0 && !tilemap.HasTile(up) && !visitedNodes.Contains(up) && !tilesBlockedByEnemies.Contains(up))
             {
                 nodesList.Add(
                     new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, tilemap.CellToWorld(up)), id++), 
@@ -85,7 +119,7 @@ public static class MyUtils
             }
                 
             // ReSharper disable once InvertIf
-            if (verticalGrid < currentRoom.gridHeight-1 && !tilemap.HasTile(down) && !visitedNodes.Contains(down))
+            if (verticalGrid < currentRoom.gridHeight-1 && !tilemap.HasTile(down) && !visitedNodes.Contains(down) && !tilesBlockedByEnemies.Contains(down))
             {
                 nodesList.Add(
                     new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, tilemap.CellToWorld(down)), id++),
@@ -95,7 +129,7 @@ public static class MyUtils
         }
     }
     
-    private static List<Vector2> MakePath(Cell currentCell, Tilemap tileMap, CircleCollider2D circleCollider2D, ContactFilter2D contactFilter2D)
+    private static List<Vector2> MakePath(Cell currentCell, Tilemap tileMap, CircleCollider2D circleCollider2D, ContactFilter2D contactFilter2D, Color color)
     {
         List<Vector2> path = new();
         var lastPos = tileMap.CellToWorld(currentCell.position);
@@ -152,7 +186,7 @@ public static class MyUtils
 
         for (var i = 1; i < finalPath.Count; i++)
         {
-            Debug.DrawLine(finalPath[i-1], finalPath[i],Color.red, .05f);
+            Debug.DrawLine(finalPath[i-1], finalPath[i],color, .05f);
         }
             
         finalPath.RemoveAt(0);

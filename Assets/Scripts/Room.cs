@@ -26,10 +26,9 @@ public class Room : MonoBehaviour
     [SerializeField] private float perlinNoiseScale = 20f;
     private GameManager.RoomType _roomType;
 
-    public bool[,] obstaclesGrid;
     private Camera _camera;
     private bool _visited;
-
+    
     private void Start()
     {
         _camera = Camera.main;
@@ -80,7 +79,7 @@ public class Room : MonoBehaviour
             for (var j = 1; j < gridWidth-1; j++)
             {
                 var sample = PerlinNoise(i,j, offsetX, offsetY);
-                if (sample > 0.55f)
+                if (sample > 0.75f)
                 {
                     rocksTilemap.SetTile(currentCell, rocksTiles[MyUtils.Random.Next(rockTilesLength)]);
                     tilesGrid[i, j] = true;
@@ -93,7 +92,6 @@ public class Room : MonoBehaviour
         var unblockedTiles = new bool[gridHeight, gridWidth];
         CheckForBlockedArea(tilesGrid, 0,0, unblockedTiles);
         RepairArea(tilesGrid, unblockedTiles, startingCell);
-        obstaclesGrid = unblockedTiles;
     }
 
     private float PerlinNoise(int x, int y, float offsetX, float offsetY)
