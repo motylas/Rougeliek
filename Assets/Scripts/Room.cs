@@ -18,7 +18,8 @@ public class Room : MonoBehaviour
     [SerializeField] private string topDoorCloseAnim, bottomDoorCloseAnim, leftDoorCloseAnim, rightDoorCloseAnim;
     [SerializeField] private List<Transform> spawnPoints;
     [SerializeField] private Enemy[] enemies;
-    [SerializeField] private Transform enemiesContainer;
+    [SerializeField] private Enemy boss;
+    [SerializeField] public Transform enemiesContainer;
     [SerializeField] public Tilemap rocksTilemap;
     [SerializeField] private TileBase[] rocksTiles;
     [SerializeField] public Transform firstCellTransform;
@@ -225,9 +226,7 @@ public class Room : MonoBehaviour
     
     private void SpawnBoss()
     {
-        var boss = Instantiate(enemies[0], transform.position, quaternion.identity, enemiesContainer);
-        boss.gameObject.transform.localScale *= 2;
-        boss.GetDamage(-15);
+        Instantiate(boss, transform.position, quaternion.identity, enemiesContainer);
     }
 
     private IEnumerator CheckForEnemies()

@@ -1397,6 +1397,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 1585454823745214726, guid: b9f438dbb0f061d4b86f04269c6c1a2c, type: 3}
   - {fileID: 3598349124520956106, guid: 47d05ce5bd29fd0408ec1a87af216482, type: 3}
+  boss: {fileID: 2473475278717355894, guid: c6ba3b22a9c0f0e4994b78e31b795266, type: 3}
   enemiesContainer: {fileID: 4759285219555891086}
   rocksTilemap: {fileID: 4526116754018874994}
   rocksTiles:
