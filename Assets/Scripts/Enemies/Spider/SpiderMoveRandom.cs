@@ -42,7 +42,7 @@ public class SpiderMoveRandom : EnemyState
         count = _rb.Cast(new Vector2(0,_yAxisDirection), contactFilter, _castCollisions,
             Time.fixedDeltaTime + collisionOffset);
         if (count > 0) _yAxisDirection = -_yAxisDirection;
-        _moveDirection = new Vector2(_xAxisDirection, _yAxisDirection).normalized;
+        
     }
 
     public override EnemyState OnUpdateState()

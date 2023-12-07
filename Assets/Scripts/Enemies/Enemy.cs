@@ -4,9 +4,9 @@ using UnityEngine;
 public abstract class Enemy: MonoBehaviour
 {
     protected EnemyState CurrentState;
-    private Animator Animator;
+    public Animator Animator;
 
-    [SerializeField] private int healthPoints;
+    public int healthPoints;
     private Player _player;
     
     // Path Find
@@ -64,7 +64,7 @@ public abstract class Enemy: MonoBehaviour
         if (healthPoints <= 0) Die();
     }
     
-    private void Die()
+    protected virtual void Die()
     {
         GameManager.Instance.enemiesList.Remove(colliderTransform);
         Destroy(gameObject);
