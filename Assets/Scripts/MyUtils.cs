@@ -45,7 +45,8 @@ public static class MyUtils
     public static List<Vector2> FindPath(Vector3 startPosition, Vector3 finalPosition, CircleCollider2D circleCollider2D, ContactFilter2D contactFilter2D, Color color)
     {
         var currentRoom = GameManager.Instance.currentRoom;
-        var tilemap = currentRoom.rocksTilemap;
+        var rocksTilemap = currentRoom.rocksTilemap;
+        var boxesTilemap = currentRoom.boxesTilemap;
 
         // CHECK FOR ENEMIES
         var enemiesList = GameManager.Instance.enemiesList;
@@ -53,12 +54,12 @@ public static class MyUtils
         foreach (var transform in enemiesList)
         {
             if (circleCollider2D.transform == transform) continue;
-            tilesBlockedByEnemies.Add(tilemap.WorldToCell(transform.position));
+            tilesBlockedByEnemies.Add(rocksTilemap.WorldToCell(transform.position));
         }
         
-        var firstCellInRoom = tilemap.WorldToCell(currentRoom.firstCellTransform.position);
-        var startingCell = tilemap.WorldToCell(startPosition);
-        var finalCell = tilemap.WorldToCell(finalPosition);
+        var firstCellInRoom = rocksTilemap.WorldToCell(currentRoom.firstCellTransform.position);
+        var startingCell = rocksTilemap.WorldToCell(startPosition);
+        var finalCell = rocksTilemap.WorldToCell(finalPosition);
         
         List<Vector3Int> visitedNodes = new() { startingCell };
         var id = 0;
@@ -71,7 +72,7 @@ public static class MyUtils
             var currentCell = nodesList.First().Value;
             
             // If destination found, make new path and reset values
-            if (currentCell.position == finalCell) return MakePath(currentCell, tilemap, circleCollider2D, contactFilter2D, color);
+            if (currentCell.position == finalCell) return MakePath(currentCell, rocksTilemap, circleCollider2D, contactFilter2D, color);
             
             // Get rest values
             var currentDistance = nodesList.First().Key;
@@ -94,35 +95,35 @@ public static class MyUtils
             var down = new Vector3Int(currentCell.position.x, currentCell.position.y-1);
         
         
-            if (horizontalGrid > 0 && !tilemap.HasTile(left) && !visitedNodes.Contains(left) && !tilesBlockedByEnemies.Contains(left))
+            if (horizontalGrid > 0 && !rocksTilemap.HasTile(left) && !boxesTilemap.HasTile(left) && !visitedNodes.Contains(left) && !tilesBlockedByEnemies.Contains(left))
             {
                 nodesList.Add(
-                    new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, tilemap.CellToWorld(left)), id++),
+                    new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, rocksTilemap.CellToWorld(left)), id++),
                     new Cell(left,currentCell,currentCell.rawDistance + 1f));
                 visitedNodes.Add(left);
             }
                 
-            if (horizontalGrid < currentRoom.gridWidth-1 && !tilemap.HasTile(right) && !visitedNodes.Contains(right) && !tilesBlockedByEnemies.Contains(right))
+            if (horizontalGrid < currentRoom.gridWidth-1 && !rocksTilemap.HasTile(right) && !boxesTilemap.HasTile(right) && !visitedNodes.Contains(right) && !tilesBlockedByEnemies.Contains(right))
             {
                 nodesList.Add(
-                    new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, tilemap.CellToWorld(right)), id++),
+                    new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, rocksTilemap.CellToWorld(right)), id++),
                     new Cell(right,currentCell,currentCell.rawDistance + 1f));
                 visitedNodes.Add(right);
             }
                 
-            if (verticalGrid > 0 && !tilemap.HasTile(up) && !visitedNodes.Contains(up) && !tilesBlockedByEnemies.Contains(up))
+            if (verticalGrid > 0 && !rocksTilemap.HasTile(up) && !boxesTilemap.HasTile(up) && !visitedNodes.Contains(up) && !tilesBlockedByEnemies.Contains(up))
             {
                 nodesList.Add(
-                    new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, tilemap.CellToWorld(up)), id++), 
+                    new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, rocksTilemap.CellToWorld(up)), id++), 
                     new Cell(up,currentCell,currentCell.rawDistance + 1f));
                 visitedNodes.Add(up);
             }
                 
             // ReSharper disable once InvertIf
-            if (verticalGrid < currentRoom.gridHeight-1 && !tilemap.HasTile(down) && !visitedNodes.Contains(down) && !tilesBlockedByEnemies.Contains(down))
+            if (verticalGrid < currentRoom.gridHeight-1 && !rocksTilemap.HasTile(down) && !boxesTilemap.HasTile(down) && !visitedNodes.Contains(down) && !tilesBlockedByEnemies.Contains(down))
             {
                 nodesList.Add(
-                    new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, tilemap.CellToWorld(down)), id++),
+                    new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, rocksTilemap.CellToWorld(down)), id++),
                     new Cell(down,currentCell,currentCell.rawDistance + 1f));
                 visitedNodes.Add(down);
             }

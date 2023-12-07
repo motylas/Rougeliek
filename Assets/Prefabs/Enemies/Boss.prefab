@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9837b8f773f64340bdd92fa0b02d30e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
   healthPoints: 200
   chaseArea: 0
   circleCollider2D: {fileID: 1429895362512512310}

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor.Tilemaps;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 
@@ -21,11 +22,14 @@ public class Room : MonoBehaviour
     [SerializeField] private Enemy boss;
     [SerializeField] public Transform enemiesContainer;
     [SerializeField] public Tilemap rocksTilemap;
-    [SerializeField] private TileBase[] rocksTiles;
+    [SerializeField] public Tilemap boxesTilemap;
+    [SerializeField] public Tilemap bushesTilemap;
+    [SerializeField] private TileBase[] tiles; // 0 - box, 1,2 - rocks, 3 - bush
     [SerializeField] public Transform firstCellTransform;
     [SerializeField] public int gridWidth, gridHeight;
     [SerializeField] private float perlinNoiseScale = 20f;
     private GameManager.RoomType _roomType;
+    private const int TilemapsCount = 3; // 3 - there are 3 types of tilemaps, need to change if 
 
     private Camera _camera;
     private bool _visited;
@@ -74,7 +78,6 @@ public class Room : MonoBehaviour
         var offsetX = MyUtils.RandomFloat(0f, 99999f);
         var offsetY = MyUtils.RandomFloat(0f, 99999f);
         var currentCell = startingCell;
-        var rockTilesLength = rocksTiles.Length;
         for (var i = 1; i < gridHeight-1; i++)
         {
             for (var j = 1; j < gridWidth-1; j++)
@@ -82,8 +85,7 @@ public class Room : MonoBehaviour
                 var sample = PerlinNoise(i,j, offsetX, offsetY);
                 if (sample > 0.75f)
                 {
-                    rocksTilemap.SetTile(currentCell, rocksTiles[MyUtils.Random.Next(rockTilesLength)]);
-                    tilesGrid[i, j] = true;
+                    AddTileToProperTilemap(currentCell, tilesGrid, i, j);
                 }
                 currentCell.x++;
             }
@@ -93,6 +95,35 @@ public class Room : MonoBehaviour
         var unblockedTiles = new bool[gridHeight, gridWidth];
         CheckForBlockedArea(tilesGrid, 0,0, unblockedTiles);
         RepairArea(tilesGrid, unblockedTiles, startingCell);
+    }
+
+    private void AddTileToProperTilemap(Vector3Int currentCell, bool[,] tilesGrid, int i, int j)
+    {
+        var tilemapType = MyUtils.Random.Next(TilemapsCount);
+        Tile tile;
+        switch (tilemapType)
+        {
+            case 0:
+                tile = (Tile) tiles[0];
+                tile.color = new Color(tile.color.r, tile.color.g, tile.color.b, 1);
+                boxesTilemap.SetTile(currentCell, tile);
+                tilesGrid[i, j] = true;
+                break;
+            case 1:
+                tile = (Tile) tiles[MyUtils.Random.Next(2) + 1];
+                tile.color = new Color(tile.color.r, tile.color.g, tile.color.b, 1);
+                rocksTilemap.SetTile(currentCell, tile);
+                tilesGrid[i, j] = true;
+                break;
+            case 2:
+                tile = (Tile) tiles[3];
+                tile.color = new Color(tile.color.r, tile.color.g, tile.color.b, 1);
+                bushesTilemap.SetTile(currentCell, tile);
+                break;
+            default:
+                Debug.LogError("Tilemap type index over bounds!");
+                break;
+        }
     }
 
     private float PerlinNoise(int x, int y, float offsetX, float offsetY)
@@ -113,14 +144,14 @@ public class Room : MonoBehaviour
 
     private void RepairArea(bool[,] tilesGrid, bool[,] unlockedTiles, Vector3Int startingCell)
     {
-        var rockTilesLength = rocksTiles.Length;
+        var rockTilesLength = tiles.Length;
         startingCell += Vector3Int.left + Vector3Int.up;
         var startingX = startingCell.x;
         for (var i = 0; i < gridHeight; i++)
         {
             for (var j = 0; j < gridWidth; j++)
             {
-                if (!tilesGrid[i,j] && !unlockedTiles[i,j]) rocksTilemap.SetTile(startingCell, rocksTiles[MyUtils.Random.Next(rockTilesLength)]);
+                if (!tilesGrid[i,j] && !unlockedTiles[i,j]) rocksTilemap.SetTile(startingCell, tiles[MyUtils.Random.Next(rockTilesLength)]);
                 startingCell.x++;
             }
             startingCell.x = startingX;

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4769444881524016492}
   m_Layer: 8
   m_Name: Skeleton Wizard Projectile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

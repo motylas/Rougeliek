@@ -21,7 +21,8 @@ public class Boss : Enemy
     {
         if (maxFamilyCount != familyCount)
         {
-            var spiderOne = (Boss) Instantiate(spiderPrefab, transform.position, Quaternion.identity, GameManager.Instance.currentRoom.enemiesContainer);
+            var position = transform.position;
+            var spiderOne = (Boss) Instantiate(spiderPrefab, position, Quaternion.identity, GameManager.Instance.currentRoom.enemiesContainer);
             spiderOne.transform.localScale *= .5f;
             var stateOne = (BossMove) spiderOne.bossMove;
             stateOne.force += 30;
@@ -30,7 +31,7 @@ public class Boss : Enemy
             spiderOne.maxHealth = maxHealth / 2;
             spiderOne.Animator.speed *= 1.3f;
             
-            var spiderTwo = (Boss) Instantiate(spiderPrefab, transform.position, Quaternion.identity, GameManager.Instance.currentRoom.enemiesContainer);
+            var spiderTwo = (Boss) Instantiate(spiderPrefab, position, Quaternion.identity, GameManager.Instance.currentRoom.enemiesContainer);
             spiderTwo.transform.localScale *= .5f;
             var stateTwo = (BossMove) spiderTwo.bossMove;
             stateTwo.force = stateOne.force;
