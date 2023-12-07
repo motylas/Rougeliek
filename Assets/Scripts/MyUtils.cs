@@ -186,7 +186,7 @@ public static class MyUtils
 
         for (var i = 1; i < finalPath.Count; i++)
         {
-            Debug.DrawLine(finalPath[i-1], finalPath[i],color, .05f);
+            Debug.DrawLine(finalPath[i-1], finalPath[i],color, .1f);
         }
             
         finalPath.RemoveAt(0);
