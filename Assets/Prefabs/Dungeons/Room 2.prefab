@@ -1721,6 +1721,7 @@ MonoBehaviour:
   - {fileID: 3598349124520956106, guid: 47d05ce5bd29fd0408ec1a87af216482, type: 3}
   boss: {fileID: 2473475278717355894, guid: c6ba3b22a9c0f0e4994b78e31b795266, type: 3}
   enemiesContainer: {fileID: 4759285219555891086}
+  floorTilemap: {fileID: 4759285220286954896}
   rocksTilemap: {fileID: 4526116754018874994}
   boxesTilemap: {fileID: 6959759802788185968}
   bushesTilemap: {fileID: 8057847323125236654}
@@ -1848,7 +1849,6 @@ GameObject:
   - component: {fileID: 4759285220286954910}
   - component: {fileID: 4759285220286954896}
   - component: {fileID: 4759285220286954911}
-  - component: {fileID: 7710563118473045193}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -7422,22 +7422,6 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!19719996 &7710563118473045193
-TilemapCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4759285220286954909}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_MaximumTileChangeCount: 1000
-  m_ExtrusionFactor: 0.00001
 --- !u!1 &4759285220314341322
 GameObject:
   m_ObjectHideFlags: 0

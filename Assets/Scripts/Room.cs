@@ -21,6 +21,7 @@ public class Room : MonoBehaviour
     [SerializeField] private Enemy[] enemies;
     [SerializeField] private Enemy boss;
     [SerializeField] public Transform enemiesContainer;
+    [SerializeField] public Tilemap floorTilemap;
     [SerializeField] public Tilemap rocksTilemap;
     [SerializeField] public Tilemap boxesTilemap;
     [SerializeField] public Tilemap bushesTilemap;
@@ -65,7 +66,7 @@ public class Room : MonoBehaviour
         }
         if (_roomType == GameManager.RoomType.Normal) GenerateObstacles();
         if (_roomType == GameManager.RoomType.Starting) GameManager.Instance.currentRoom = this;
-        GameManager.Instance.currentRoom = this; //TODO delete this line after testing
+        // GameManager.Instance.currentRoom = this; //TODO delete this line after testing
     }
 
     private void GenerateObstacles()
