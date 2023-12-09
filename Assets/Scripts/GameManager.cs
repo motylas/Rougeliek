@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Room currentRoom;
     public DungeonCreator dungeonCreator;
     public List<Transform> enemiesList = new();
+    public List<SpriteRenderer> projectilesList = new();
     public int maxEnemies = 8;
     public int minEnemies = 5;
     [UDictionary.Split(30, 70)] public SpellsDict spellsDict;

@@ -199,8 +199,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3db2bc03997414b8dd0f5772a03b0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Animator: {fileID: 0}
   healthPoints: 1
-  chaseArea: 10
+  chaseArea: 5
   circleCollider2D: {fileID: 2053999345}
   contactFilter2D:
     useTriggers: 0

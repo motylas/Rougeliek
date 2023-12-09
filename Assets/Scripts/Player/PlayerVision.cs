@@ -1,98 +1,149 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 
 public class PlayerVision : MonoBehaviour
 {
     [SerializeField] private float visionArea;
+    [SerializeField] private Transform wallCollider;
+
+    // Load on room enter
     private Room _currentRoom;
-    private int _gridHeight;
-    private int _gridWidth;
-    private Vector3Int _startingCell;
-    private Tilemap _tilemap;
-    private Transform _firstCellTransform;
-    private int _startingX;
-    private Color _normalColor;
+
+    // Colors to put on tiles
+    private Color _basicColor;
     private Color _seenColor;
-    private Color _notSeenColor;
+    private Color _blackColor;
+
+    private List<SpriteRenderer> _rocksList;
+    private List<SpriteRenderer> _boxesList;
+    private List<SpriteRenderer> _bushesList;
+    private List<SpriteRenderer> _floorList;
+    private readonly List<RaycastHit2D> _raycastHit2Ds = new();
+    [SerializeField] private ContactFilter2D contactFilter2D;
+
+    private int _layerMask;
 
     private void Start()
     {
-        Invoke(nameof(LateStart), .2f);
+        _basicColor = Color.white;
+        _seenColor = new Color(0.2f, 0.2f, 0.2f, 1);
+        _blackColor = Color.black;
     }
 
-    private void LateStart()
+
+    public void OnRoomEnter()
+    {
+        SetCurrentRoom();
+        StartCoroutine(RayTracing());
+    }
+
+
+    private void SetCurrentRoom()
     {
         _currentRoom = GameManager.Instance.currentRoom;
-        _gridHeight = _currentRoom.gridHeight;
-        _gridWidth = _currentRoom.gridWidth;
-        _tilemap = _currentRoom.floorTilemap;
-        _firstCellTransform = _currentRoom.firstCellTransform;
-        _startingCell = _tilemap.WorldToCell(_firstCellTransform.position);
-        _startingX = _startingCell.x;
-        _normalColor = _tilemap.GetTile<Tile>(_startingCell).color;
-        _seenColor = new Color(0.2f, 0.2f, 0.2f, 1);
-        _notSeenColor = new Color(0f, 0f, 0f, 1);
+        _rocksList = _currentRoom.rocksList;
+        _boxesList = _currentRoom.boxesList;
+        _bushesList = _currentRoom.bushesList;
+        _floorList = _currentRoom.floorsList;
 
-        StartCoroutine(FloorVision());
+        // SET COLOR
+        
+        SetColor(_rocksList, _blackColor);
+        SetColor(_boxesList, _blackColor);
+        SetColor(_bushesList, _blackColor);
+        SetColor(_floorList, _blackColor);
     }
 
-    private IEnumerator FloorVision()
+    private IEnumerator RayTracing()
     {
-        Blackout();
         while (true)
         {
-            var currentCell = _startingCell;
-            for (var i = 0; i < _gridHeight; i++)
+            SetColorDistance(_rocksList, _seenColor);
+            SetColorDistance(_boxesList, _seenColor);
+            SetColorDistance(_bushesList, _seenColor);
+            SetColorDistance(_floorList, _seenColor);
+            HideEnemies();
+            HideProjectiles();
+            var raysToCast = 360;
+            var angle = 0f;
+            var angleIncrease = 360f / raysToCast;
+            for (var i = 0; i < raysToCast; i++)
             {
-                for (var j = 0; j < _gridWidth; j++)
+                var angleRad = angle * (Mathf.PI / 180f);
+                var direction = new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+                _raycastHit2Ds.Clear();
+                Physics2D.Raycast(wallCollider.position, direction, contactFilter2D, _raycastHit2Ds,
+                    visionArea);
+                var showFloor = false;
+                foreach (var hit in _raycastHit2Ds)
                 {
-                    var tilePos = _tilemap.CellToWorld(currentCell);
-                    tilePos.x += 0.5f;
-                    tilePos.y += 0.5f;
-                    var distance = Vector2.Distance(transform.position, tilePos);
-
-                    if (distance <= visionArea)
-                    {
-                        _tilemap.SetColor(currentCell, _normalColor);
-                    }
+                    if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Projectile"))
+                        hit.collider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
                     else
                     {
-                        if (_tilemap.GetColor(currentCell) == _normalColor) _tilemap.SetColor(currentCell, _seenColor);
+                        hit.collider.gameObject.GetComponent<SpriteRenderer>().color = _basicColor;
+                        if (showFloor) break;
+                        if (hit.collider.CompareTag("RockV")) showFloor = true;
+                        if (hit.collider.CompareTag("BushV"))
+                        {
+                            if (Vector2.Distance(hit.collider.transform.position, wallCollider.position) > 0.7f)
+                                showFloor = true;
+                        }
                     }
-                    
-                    currentCell.x++;
                 }
-
-                currentCell.x = _startingX;
-                currentCell.y--;
+                angle -= angleIncrease;
             }
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.02f);
         }
     }
 
-    private void Blackout()
+    private void HideEnemies()
     {
-        var currentCell = _startingCell;
-        for (var i = 0; i < _gridHeight; i++)
+        foreach (var enemy in GameManager.Instance.enemiesList)
         {
-            for (var j = 0; j < _gridWidth; j++)
-            {
-                _tilemap.SetTileFlags(currentCell, TileFlags.None);
-                _tilemap.SetColor(currentCell, _notSeenColor);
-                currentCell.x++;
-            }
-            currentCell.x = _startingX;
-            currentCell.y--;
+            enemy.GetComponentInParent<SpriteRenderer>().enabled = false;
+        }
+    }   
+    private void HideProjectiles()
+    {
+        foreach (var sprite in GameManager.Instance.projectilesList)
+        {
+            sprite.enabled = false;
+        }
+    }
+
+
+    public void OnRoomClear()
+    {
+        StopAllCoroutines();
+        SetColor(_floorList, _basicColor);
+        SetColor(_rocksList, _basicColor);
+        SetColor(_boxesList, _basicColor);
+        SetColor(_bushesList, _basicColor);
+    }
+
+    private void SetColor(List<SpriteRenderer> obstaclesList, Color color)
+    {
+        foreach (var sprite in obstaclesList)
+        {
+            sprite.color = color;
+        }
+    }
+    
+    private void SetColorDistance(List<SpriteRenderer> obstaclesList, Color color)
+    {
+        foreach (var sprite in obstaclesList)
+        {
+            if (sprite.color == _basicColor) sprite.color = color;
         }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, visionArea); // Chase area draw
+        Gizmos.DrawWireSphere(wallCollider.position, visionArea); // Chase area draw
     }
 }

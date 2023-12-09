@@ -74,9 +74,9 @@ GameObject:
   - component: {fileID: 6959759802788185968}
   - component: {fileID: 653536913550294050}
   - component: {fileID: 7730060046969977527}
-  m_Layer: 16
+  m_Layer: 11
   m_Name: Boxes
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,7 +198,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -680171983
   m_SortingLayer: 2
-  m_SortingOrder: 9
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -567,7 +567,7 @@ GameObject:
   - component: {fileID: 2817305801469003981}
   m_Layer: 14
   m_Name: Bushes
-  m_TagString: Untagged
+  m_TagString: Bush
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -687,9 +687,9 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1745758373
-  m_SortingLayer: 4
-  m_SortingOrder: 50
+  m_SortingLayerID: -680171983
+  m_SortingLayer: 2
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1653,6 +1653,7 @@ Transform:
   - {fileID: 4759285219555891086}
   - {fileID: 1507474176140789748}
   - {fileID: 5741971623620726784}
+  - {fileID: 8907661253982920395}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1718,7 +1719,7 @@ MonoBehaviour:
   - {fileID: 4637013606150159253}
   enemies:
   - {fileID: 1585454823745214726, guid: b9f438dbb0f061d4b86f04269c6c1a2c, type: 3}
-  - {fileID: 3598349124520956106, guid: 47d05ce5bd29fd0408ec1a87af216482, type: 3}
+  - {fileID: 4111165604342719499, guid: 4d656de5a906da24585a3664dcc6d092, type: 3}
   boss: {fileID: 2473475278717355894, guid: c6ba3b22a9c0f0e4994b78e31b795266, type: 3}
   enemiesContainer: {fileID: 4759285219555891086}
   floorTilemap: {fileID: 4759285220286954896}
@@ -1734,6 +1735,16 @@ MonoBehaviour:
   gridWidth: 34
   gridHeight: 16
   perlinNoiseScale: 20
+  obstaclesContainer: {fileID: 8907661253982920395}
+  bushPrefab: {fileID: 2690321200294564067, guid: dcaac82aa8e706842bc911cd17b36ec1, type: 3}
+  rockPrefab1: {fileID: 5150113959698665417, guid: 057973083d8b7d1499d8906752fff520, type: 3}
+  rockPrefab2: {fileID: 8574207314139200072, guid: 92481465597d6464fa2a95f934f52392, type: 3}
+  boxPrefab: {fileID: 7051787536237902066, guid: 0300878d3485cfe4e8f48438a4154ea8, type: 3}
+  floorPrefab: {fileID: 7397524823476113999, guid: 8f5c344ecc8c91d4aa7d16356d98f3f4, type: 3}
+  bushesList: []
+  rocksList: []
+  boxesList: []
+  floorsList: []
 --- !u!61 &4759285220212237055
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7413,7 +7424,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1148165655
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -17923,6 +17934,37 @@ Transform:
   m_Father: {fileID: 1507474176140789748}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7411034572055207678
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8907661253982920395}
+  m_Layer: 0
+  m_Name: Obstacles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8907661253982920395
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7411034572055207678}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4759285220212237050}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7712293936151354651
 GameObject:
   m_ObjectHideFlags: 0
@@ -17936,9 +17978,9 @@ GameObject:
   - component: {fileID: 5859685142547966878}
   - component: {fileID: 8103000017034161785}
   - component: {fileID: 2011468502014414437}
-  m_Layer: 15
+  m_Layer: 11
   m_Name: Rocks
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18060,7 +18102,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -680171983
   m_SortingLayer: 2
-  m_SortingOrder: 9
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16

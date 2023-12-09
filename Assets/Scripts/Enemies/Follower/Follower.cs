@@ -13,7 +13,6 @@ public class Follower : Enemy
         followingState = GetComponent<FollowerFollowing>();
         patrollingState = GetComponent<FollowerPatrol>();
         searchingState = GetComponent<FollowerSearch>();
-        colliderTransform = circleCollider2D.transform;
 
         Setup(patrollingState);
     }

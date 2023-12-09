@@ -34,6 +34,17 @@ public class Room : MonoBehaviour
 
     private Camera _camera;
     private bool _visited;
+
+    [SerializeField] private Transform obstaclesContainer;
+    [SerializeField] private SpriteRenderer bushPrefab;
+    [SerializeField] private SpriteRenderer rockPrefab1;
+    [SerializeField] private SpriteRenderer rockPrefab2;
+    [SerializeField] private SpriteRenderer boxPrefab;
+    [SerializeField] private SpriteRenderer floorPrefab;
+    public List<SpriteRenderer> bushesList = new();
+    public List<SpriteRenderer> rocksList = new();
+    public List<SpriteRenderer> boxesList = new();
+    public List<SpriteRenderer> floorsList = new();
     
     private void Start()
     {
@@ -66,19 +77,34 @@ public class Room : MonoBehaviour
         }
         if (_roomType == GameManager.RoomType.Normal) GenerateObstacles();
         if (_roomType == GameManager.RoomType.Starting) GameManager.Instance.currentRoom = this;
-        // GameManager.Instance.currentRoom = this; //TODO delete this line after testing
     }
 
     private void GenerateObstacles()
     {
         var tilesGrid = new bool[gridHeight, gridWidth];
         var startingCell = rocksTilemap.WorldToCell(firstCellTransform.position);
-        startingCell.x++;
-        startingCell.y--;
         var startingX = startingCell.x;
         var offsetX = MyUtils.RandomFloat(0f, 99999f);
         var offsetY = MyUtils.RandomFloat(0f, 99999f);
         var currentCell = startingCell;
+        // Place floor
+        for (var i = 0; i < gridHeight; i++)
+        {
+            for (var j = 0; j < gridWidth; j++)
+            {
+                var floorPosition = floorTilemap.CellToWorld(currentCell);
+                floorPosition.x += .5f;
+                floorPosition.y += .5f;
+                floorsList.Add(Instantiate(floorPrefab, floorPosition, Quaternion.identity, obstaclesContainer));
+                currentCell.x++;
+            }
+            currentCell.x = startingX;
+            currentCell.y--;
+        }
+        startingCell.x++;
+        startingCell.y--;
+        currentCell = startingCell;
+        // Obstacles Logic
         for (var i = 1; i < gridHeight-1; i++)
         {
             for (var j = 1; j < gridWidth-1; j++)
@@ -109,17 +135,32 @@ public class Room : MonoBehaviour
                 tile.color = new Color(tile.color.r, tile.color.g, tile.color.b, 1);
                 boxesTilemap.SetTile(currentCell, tile);
                 tilesGrid[i, j] = true;
+                var boxPosition = boxesTilemap.CellToWorld(currentCell);
+                boxPosition.x += .5f;
+                boxPosition.y += .5f;
+                boxesList.Add(Instantiate(boxPrefab, boxPosition, Quaternion.identity, obstaclesContainer));
                 break;
             case 1:
-                tile = (Tile) tiles[MyUtils.Random.Next(2) + 1];
+                var randomRock = MyUtils.Random.Next(2) + 1;
+                tile = (Tile) tiles[randomRock];
                 tile.color = new Color(tile.color.r, tile.color.g, tile.color.b, 1);
                 rocksTilemap.SetTile(currentCell, tile);
                 tilesGrid[i, j] = true;
+                var rockPosition = rocksTilemap.CellToWorld(currentCell);
+                rockPosition.x += .5f;
+                rockPosition.y += .5f;
+                rocksList.Add(randomRock == 1
+                    ? Instantiate(rockPrefab1, rockPosition, Quaternion.identity, obstaclesContainer)
+                    : Instantiate(rockPrefab2, rockPosition, Quaternion.identity, obstaclesContainer));
                 break;
             case 2:
                 tile = (Tile) tiles[3];
                 tile.color = new Color(tile.color.r, tile.color.g, tile.color.b, 1);
                 bushesTilemap.SetTile(currentCell, tile);
+                var bushPosition = bushesTilemap.CellToWorld(currentCell);
+                bushPosition.x += .5f;
+                bushPosition.y += .5f;
+                bushesList.Add(Instantiate(bushPrefab, bushPosition, Quaternion.identity, obstaclesContainer));
                 break;
             default:
                 Debug.LogError("Tilemap type index over bounds!");
@@ -177,6 +218,7 @@ public class Room : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.gameObject.CompareTag("Player")) return;
+        GameManager.Instance.currentRoom = this;
         HandleCamera();
         HandleEnemies();
     }
@@ -202,6 +244,7 @@ public class Room : MonoBehaviour
         LockGates(true);
         Debug.Log("SPAWNING ENEMIES");
         SpawnEnemies();
+        GameManager.Instance.player.OnStartVision();
         StartCoroutine(CheckForEnemies());
     }
     
@@ -269,6 +312,7 @@ public class Room : MonoBehaviour
         }
 
         OnRoomClear();
+        if (_roomType == GameManager.RoomType.Normal) GameManager.Instance.player.OnEndVision();
     }
 
     private void OnRoomClear()

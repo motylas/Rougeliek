@@ -7,6 +7,13 @@ TagManager:
   - Enemy
   - Wall
   - Projectile
+  - Rock
+  - Bush
+  - Box
+  - RockV
+  - BoxV
+  - BushV
+  - FloorV
   layers:
   - Default
   - TransparentFX
@@ -23,12 +30,12 @@ TagManager:
   - BodyWallColl
   - RoomActivate
   - Bush
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Rock
+  - Box
+  - BushV
+  - RockV
+  - BoxV
+  - FloorV
   - 
   - 
   - 

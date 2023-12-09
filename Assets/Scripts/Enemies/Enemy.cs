@@ -13,7 +13,7 @@ public abstract class Enemy: MonoBehaviour
     public float chaseArea;
     public CircleCollider2D circleCollider2D;
     [SerializeField] protected ContactFilter2D contactFilter2D;
-    protected Transform colliderTransform;
+    private Transform colliderTransform;
     protected Color color = Color.green;
 
     private List<Vector2> globalPath = new();
@@ -36,6 +36,7 @@ public abstract class Enemy: MonoBehaviour
 
     protected void Setup(EnemyState startingState)
     {
+        colliderTransform = circleCollider2D.transform;
         GameManager.Instance.enemiesList.Add(colliderTransform);
         _player = GameManager.Instance.player;
         Animator = GetComponent<Animator>();
