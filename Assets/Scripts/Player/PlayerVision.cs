@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// TODO ADD VISION TO DOORS AND WALLS
+// TODO ADD VISION TO ENEMIES
+// TODO REMAKE SKELETON
 public class PlayerVision : MonoBehaviour
 {
     [SerializeField] private float visionArea;

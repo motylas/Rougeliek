@@ -103,6 +103,7 @@ public class Room : MonoBehaviour
         }
         startingCell.x++;
         startingCell.y--;
+        startingX = startingCell.x;
         currentCell = startingCell;
         // Obstacles Logic
         for (var i = 1; i < gridHeight-1; i++)
