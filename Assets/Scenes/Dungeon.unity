@@ -140,7 +140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 107132084, guid: 0517941ed559a2f45b66c9f1f5c11881, type: 3}
       propertyPath: contactFilter2D.layerMask.m_Bits
-      value: 1966592
+      value: 1966848
       objectReference: {fileID: 0}
     - target: {fileID: 4252067481214999916, guid: 0517941ed559a2f45b66c9f1f5c11881, type: 3}
       propertyPath: m_RootOrder
