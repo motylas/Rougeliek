@@ -245,7 +245,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 483
+  strength: 1
   playersImmortalityTime: 1
+  ability: {fileID: 0}
+  startingAbility: {fileID: 7068834699074346112, guid: 936b01dc058555845a5c219d34d6e924, type: 3}
 --- !u!114 &4252067481214999910
 MonoBehaviour:
   m_ObjectHideFlags: 0

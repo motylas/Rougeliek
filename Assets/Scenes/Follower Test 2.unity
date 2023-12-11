@@ -457,10 +457,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: player
       objectReference: {fileID: 0}
-    - target: {fileID: 4252067481214999918, guid: 0517941ed559a2f45b66c9f1f5c11881, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0517941ed559a2f45b66c9f1f5c11881, type: 3}
 --- !u!1 &179702900
@@ -5804,6 +5800,7 @@ MonoBehaviour:
   - {fileID: 3598349124520956106, guid: 47d05ce5bd29fd0408ec1a87af216482, type: 3}
   boss: {fileID: 0}
   enemiesContainer: {fileID: 1856581310}
+  floorTilemap: {fileID: 0}
   rocksTilemap: {fileID: 467685735}
   boxesTilemap: {fileID: 747043422}
   bushesTilemap: {fileID: 1490337729}
@@ -5816,6 +5813,16 @@ MonoBehaviour:
   gridWidth: 34
   gridHeight: 16
   perlinNoiseScale: 20
+  obstaclesContainer: {fileID: 0}
+  bushPrefab: {fileID: 0}
+  rockPrefab1: {fileID: 0}
+  rockPrefab2: {fileID: 0}
+  boxPrefab: {fileID: 0}
+  floorPrefab: {fileID: 0}
+  bushesList: []
+  rocksList: []
+  boxesList: []
+  floorsList: []
 --- !u!4 &574042884
 Transform:
   m_ObjectHideFlags: 0

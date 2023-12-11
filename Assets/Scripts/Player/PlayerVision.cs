@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO ADD VISION TO ENEMIES
 // TODO REMAKE SKELETON
 // TODO REPAIR MASS AND FORCE
 public class PlayerVision : MonoBehaviour
@@ -42,8 +41,8 @@ public class PlayerVision : MonoBehaviour
 
     public void OnRoomEnter()
     {
-        SetCurrentRoom();
-        StartCoroutine(RayTracing());
+        // SetCurrentRoom();
+        // StartCoroutine(RayTracing());
     }
 
 

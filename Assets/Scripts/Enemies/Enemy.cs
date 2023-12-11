@@ -26,7 +26,7 @@ public abstract class Enemy: MonoBehaviour
     // Key
     [SerializeField] private Key keyPrefab;
     public double keyDropRate;
-    
+    private int layerMask;
     
 
     private void ChangeState(EnemyState newState)
@@ -46,6 +46,7 @@ public abstract class Enemy: MonoBehaviour
         Animator = GetComponent<Animator>();
         CurrentState = startingState;
         startingState.OnEnterState();
+        layerMask = LayerMask.GetMask("RockV") | LayerMask.GetMask("BushV") | LayerMask.GetMask("Player");
     }
     
     private void FixedUpdate()
@@ -93,5 +94,23 @@ public abstract class Enemy: MonoBehaviour
     {
         Gizmos.color = color;
         Gizmos.DrawWireSphere(transform.position, chaseArea); // Chase area draw
+    }
+    
+    public bool PlayerSeen()
+    {
+        var raysToCast = 360;
+        var angle = 0f;
+        var angleIncrease = 360f / raysToCast;
+        for (var i = 0; i < raysToCast; i++)
+        {
+            var angleRad = angle * (Mathf.PI / 180f);
+            angle -= angleIncrease;
+            var direction = new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+            var hit = Physics2D.Raycast(circleCollider2D.transform.position, direction, chaseArea,
+                layerMask);
+            if (!hit) continue;
+            if (hit.collider.CompareTag("Player")) return true;
+        }
+        return false;
     }
 }
