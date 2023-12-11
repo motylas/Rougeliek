@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Globalization;
 using UnityEngine;
 
@@ -33,6 +34,12 @@ public class Player : MonoBehaviour
     public void ReceiveDamage(int damage)
     {
         _playerFight.ReceiveDamage(damage);
+        GameManager.Instance.healthTextMeshPro.text = _playerFight.hp.ToString();
+    }
+
+    public float GetDamageMultiplayer()
+    {
+        return _playerFight.strength;
     }
     
     public void HealthUp(int life)
@@ -45,6 +52,24 @@ public class Player : MonoBehaviour
     {
         _playerFight.strength *= strength;
         GameManager.Instance.strengthTextMeshPro.text = _playerFight.strength.ToString(CultureInfo.InvariantCulture);
+    }
+
+    public void SetCurrentAbility(Ability ability)
+    {
+        _playerFight.ability.spriteRenderer.enabled = true;
+        StartCoroutine(SetCanBeTaken(_playerFight.ability));
+        _playerFight.ability.transform.position = ability.transform.position;
+        ability.spriteRenderer.enabled = false;
+        ability.canBeTaken = false;
+        GameManager.Instance.currentWeaponImage.sprite = ability.spriteRenderer.sprite;
+        GameManager.Instance.currentWeaponImage.color = ability.spriteRenderer.color;
+        _playerFight.ability = ability;
+    }
+
+    private IEnumerator SetCanBeTaken(Ability ability)
+    {
+        yield return new WaitForSeconds(0.1f);
+        ability.canBeTaken = true;
     }
 
     public void OnStartVision()

@@ -9,6 +9,7 @@ public class Chest : MonoBehaviour
     [SerializeField] private Sprite chestOpen;
     private bool isOpen = false;
     [SerializeField] private List<PowerUps> powerUpsList;
+    [SerializeField] private List<Ability> abilitiesList;
 
     private void Start()
     {
@@ -21,9 +22,12 @@ public class Chest : MonoBehaviour
         if (!isOpen && GameManager.Instance.keys > 0)
         {
             GameManager.Instance.keys--;
+            GameManager.Instance.keysTextMeshPro.text = GameManager.Instance.keys.ToString();
             _spriteRenderer.sprite = chestOpen;
             isOpen = true;
-            Instantiate(powerUpsList[MyUtils.Random.Next(powerUpsList.Count)], transform.position, Quaternion.identity, transform);
+            if (0.5 > MyUtils.Random.NextDouble())
+                Instantiate(powerUpsList[MyUtils.Random.Next(powerUpsList.Count)], transform.position, Quaternion.identity, transform);
+            else Instantiate(abilitiesList[MyUtils.Random.Next(abilitiesList.Count)], transform.position, Quaternion.identity, transform);
         }
     }
 }

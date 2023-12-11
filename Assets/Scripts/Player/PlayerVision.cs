@@ -4,7 +4,6 @@ using UnityEngine;
 
 // TODO ADD VISION TO ENEMIES
 // TODO REMAKE SKELETON
-// TODO WEAPONS
 // TODO REPAIR MASS AND FORCE
 public class PlayerVision : MonoBehaviour
 {

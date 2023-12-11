@@ -15,11 +15,17 @@ public class PlayerFight : MonoBehaviour
     private Coroutine _takeDamageCoroutine;
     
     // Current Ability
-    private Ability _ability;
+    [SerializeField] public Ability ability;
+    [SerializeField] private Ability startingAbility;
 
     private void Start()
     {
-        _ability = gameObject.AddComponent<StarterAbility>();
+        ability = Instantiate(startingAbility, transform.position, Quaternion.identity);
+        ability.spriteRenderer.enabled = false;
+        ability.canBeTaken = false;
+        GameManager.Instance.currentWeaponImage.sprite = ability.spriteRenderer.sprite;
+        GameManager.Instance.currentWeaponImage.color = ability.spriteRenderer.color;
+        ability.OnStart();
         ReceiveDamageSetup();
         GameManager.Instance.strengthTextMeshPro.text = strength.ToString(CultureInfo.InvariantCulture);
         GameManager.Instance.healthTextMeshPro.text = hp.ToString();
@@ -27,7 +33,7 @@ public class PlayerFight : MonoBehaviour
     
     private void Update()
     {
-        Spells();
+        UseAbility();
     }
     
     // Setup Methods //
@@ -40,20 +46,10 @@ public class PlayerFight : MonoBehaviour
 
     // Attack Methods //
     
-    private void Spells()
-    {
-        PrimarySpell();
-        SecondarySpell();
-    }
 
-    private void PrimarySpell()
+    private void UseAbility()
     {
-        _ability.PrimarySpell();
-    }
-    
-    private void SecondarySpell()
-    {
-        _ability.SecondarySpell();
+        ability.UseAbility();
     }
     
     // Receive Damage Methods //

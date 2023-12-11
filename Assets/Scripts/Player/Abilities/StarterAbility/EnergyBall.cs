@@ -15,7 +15,7 @@ public class EnergyBall : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.gameObject.CompareTag("Enemy")) return;
-        other.gameObject.GetComponent<Enemy>().GetDamage(damage);
+        other.gameObject.GetComponent<Enemy>().GetDamage((int) (damage * GameManager.Instance.player.GetDamageMultiplayer()));
         GameManager.Instance.projectilesList.Remove(_spriteRenderer);
         Destroy(gameObject);
     }

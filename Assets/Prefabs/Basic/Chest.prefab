@@ -102,6 +102,9 @@ MonoBehaviour:
   powerUpsList:
   - {fileID: 614695151845652056, guid: 42649e10e48a674488e4cc9f9db47c63, type: 3}
   - {fileID: 3087924134639065872, guid: 96b34c966a89c914fab96ad1f351b91c, type: 3}
+  abilitiesList:
+  - {fileID: -6962096365716890374, guid: 19c0ab9463e7d5b41bfeb07fa37b4145, type: 3}
+  - {fileID: 7068834699074346112, guid: 936b01dc058555845a5c219d34d6e924, type: 3}
 --- !u!61 &957895106803835209
 BoxCollider2D:
   m_ObjectHideFlags: 0

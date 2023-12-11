@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,12 +15,12 @@ public class GameManager : MonoBehaviour
     public List<SpriteRenderer> projectilesList = new();
     public int maxEnemies = 8;
     public int minEnemies = 5;
-    [UDictionary.Split(30, 70)] public SpellsDict spellsDict;
 
     public int keys;
     public TextMeshProUGUI keysTextMeshPro;
     public TextMeshProUGUI healthTextMeshPro;
     public TextMeshProUGUI strengthTextMeshPro;
+    public Image currentWeaponImage;
 
     private void Awake()
     {
@@ -37,7 +38,6 @@ public class GameManager : MonoBehaviour
         currentRoom = room;
     }
     
-    [Serializable] public class SpellsDict : UDictionary<string, Spells> {}
     public enum RoomType
     {
         Starting,

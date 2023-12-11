@@ -1,20 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Ability : MonoBehaviour
 {
+    public SpriteRenderer spriteRenderer;
+    public bool canBeTaken = true;
+    public virtual void OnStart(){}
+    
     // ReSharper disable Unity.PerformanceAnalysis
-    public virtual void PrimarySpell()
+    public virtual void UseAbility()
     {
         if (!Input.GetKeyDown(KeyCode.Mouse0)) return;
         Debug.Log("NOT YET IMPLEMENTED");
     }
-
-    // ReSharper disable Unity.PerformanceAnalysis
-    public virtual void SecondarySpell()
+    
+    private void OnTriggerStay2D(Collider2D other)
     {
-        if (!Input.GetKeyDown(KeyCode.Mouse1)) return;
-        Debug.Log("NOT YET IMPLEMENTED");
+        if (!other.CompareTag("Player")) return;
+        if (!Input.GetKey(KeyCode.E)) return;
+        if(canBeTaken)
+            GameManager.Instance.player.SetCurrentAbility(this);
     }
 }
