@@ -23,9 +23,9 @@ public static class MyUtils
         var currentRoom = GameManager.Instance.currentRoom;
         if (currentRoom == null) return Vector3.one;
         var tileMap = currentRoom.rocksTilemap;
-        var maxX = (float) currentRoom.gridWidth;
-        var maxY = (float) currentRoom.gridHeight;
-        var firstCell = currentRoom.firstCellTransform.position;
+        var maxX = (float) currentRoom.innerGridWidth;
+        var maxY = (float) currentRoom.innerGridHeight;
+        var firstCell = currentRoom.firstInnerCellTransform.position;
         Vector3Int cellPosition;
         do
         {
@@ -57,7 +57,7 @@ public static class MyUtils
             tilesBlockedByEnemies.Add(rocksTilemap.WorldToCell(transform.position));
         }
         
-        var firstCellInRoom = rocksTilemap.WorldToCell(currentRoom.firstCellTransform.position);
+        var firstCellInRoom = rocksTilemap.WorldToCell(currentRoom.firstInnerCellTransform.position);
         var startingCell = rocksTilemap.WorldToCell(startPosition);
         var finalCell = rocksTilemap.WorldToCell(finalPosition);
         
@@ -84,9 +84,9 @@ public static class MyUtils
                 
             // Fix calculations
             if (verticalGrid < 0) verticalGrid = 0;
-            if (verticalGrid >= currentRoom.gridHeight) verticalGrid = currentRoom.gridHeight-1;
+            if (verticalGrid >= currentRoom.innerGridHeight) verticalGrid = currentRoom.innerGridHeight-1;
             if (horizontalGrid < 0) horizontalGrid = 0;
-            if (horizontalGrid >= currentRoom.gridWidth) horizontalGrid = currentRoom.gridWidth-1;
+            if (horizontalGrid >= currentRoom.innerGridWidth) horizontalGrid = currentRoom.innerGridWidth-1;
                 
             // Check adjacent tiles
             var up = new Vector3Int(currentCell.position.x, currentCell.position.y+1);
@@ -103,7 +103,7 @@ public static class MyUtils
                 visitedNodes.Add(left);
             }
                 
-            if (horizontalGrid < currentRoom.gridWidth-1 && !rocksTilemap.HasTile(right) && !boxesTilemap.HasTile(right) && !visitedNodes.Contains(right) && !tilesBlockedByEnemies.Contains(right))
+            if (horizontalGrid < currentRoom.innerGridWidth-1 && !rocksTilemap.HasTile(right) && !boxesTilemap.HasTile(right) && !visitedNodes.Contains(right) && !tilesBlockedByEnemies.Contains(right))
             {
                 nodesList.Add(
                     new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, rocksTilemap.CellToWorld(right)), id++),
@@ -120,7 +120,7 @@ public static class MyUtils
             }
                 
             // ReSharper disable once InvertIf
-            if (verticalGrid < currentRoom.gridHeight-1 && !rocksTilemap.HasTile(down) && !boxesTilemap.HasTile(down) && !visitedNodes.Contains(down) && !tilesBlockedByEnemies.Contains(down))
+            if (verticalGrid < currentRoom.innerGridHeight-1 && !rocksTilemap.HasTile(down) && !boxesTilemap.HasTile(down) && !visitedNodes.Contains(down) && !tilesBlockedByEnemies.Contains(down))
             {
                 nodesList.Add(
                     new CellID(currentCell.rawDistance + 1f + Vector3.Distance(finalPosition, rocksTilemap.CellToWorld(down)), id++),

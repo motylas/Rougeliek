@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -39,20 +40,16 @@ public class BossMove : EnemyState
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))
         {
             _moveDirection = -_moveDirection;
+            return;
         }
 
-        var noise = MyUtils.RandomFloat(0f, 1f) - 0.5f;
-        var collision = other.GetContact(0).collider.gameObject.name;
-        if (collision.StartsWith("TopGate") || collision.StartsWith("BottomGate"))
-        {
-            _moveDirection.y = -_moveDirection.y + noise;
-            _moveDirection.Normalize();
-        }
-        else if (collision.StartsWith("LeftGate") || collision.StartsWith("RightGate"))
-        {
-            _moveDirection.x = -_moveDirection.x + noise;
-            _moveDirection.Normalize();
-        }
+
+        var noiseX = MyUtils.RandomFloat(0f, .4f) - 0.2f;
+        var noiseY = MyUtils.RandomFloat(0f, .4f) - 0.2f;
+        _moveDirection = GameManager.Instance.player.transform.position - _boss.circleCollider2D.transform.position;
+        _moveDirection.x += noiseX;
+        _moveDirection.x += noiseY;
+        _moveDirection.Normalize();
     }
     
     

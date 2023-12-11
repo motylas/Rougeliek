@@ -23,6 +23,10 @@ public abstract class Enemy: MonoBehaviour
     private Vector2 _moveDirection;
     [SerializeField] private Rigidbody2D rb;
     
+    // Key
+    [SerializeField] private Key keyPrefab;
+    public double keyDropRate;
+    
     
 
     private void ChangeState(EnemyState newState)
@@ -67,6 +71,9 @@ public abstract class Enemy: MonoBehaviour
     
     protected virtual void Die()
     {
+        if (keyDropRate > MyUtils.Random.NextDouble())
+            Instantiate(keyPrefab, colliderTransform.position, Quaternion.identity, GameManager.Instance.currentRoom.transform);
+        
         GameManager.Instance.enemiesList.Remove(colliderTransform);
         Destroy(gameObject);
     }

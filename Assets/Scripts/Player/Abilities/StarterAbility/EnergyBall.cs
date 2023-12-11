@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Rocket : MonoBehaviour
+public class EnergyBall : MonoBehaviour
 {
     [SerializeField] private int damage;
     private SpriteRenderer _spriteRenderer;

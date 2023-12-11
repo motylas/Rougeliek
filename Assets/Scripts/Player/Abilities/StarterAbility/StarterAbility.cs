@@ -24,7 +24,7 @@ public class StarterAbility : Ability
         Vector2 mousePos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
         var lookDir = mousePos - _playerRb.position;
         var angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        var bullet = Instantiate(_primarySpell, _player.fireTransform.position/*_playerRb.position + lookDir.normalized*/, Quaternion.AngleAxis(angle, Vector3.forward));
+        var bullet = Instantiate(_primarySpell, _player.fireTransform.position, Quaternion.AngleAxis(angle, Vector3.forward));
         bullet.GetComponent<Rigidbody2D>().AddForce(force * lookDir.normalized , ForceMode2D.Impulse);
     }
 }

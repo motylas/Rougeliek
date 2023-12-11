@@ -219,6 +219,8 @@ MonoBehaviour:
     maxNormalAngle: 0
   force: 16000
   rb: {fileID: 4111165604342719498}
+  keyPrefab: {fileID: 7287175252053400152, guid: e289d1af1c0f5b04996d62a0716ab2cf, type: 3}
+  keyDropRate: 0.05
   followingState: {fileID: 0}
   patrollingState: {fileID: 0}
   searchingState: {fileID: 0}

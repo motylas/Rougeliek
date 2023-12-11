@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +16,11 @@ public class GameManager : MonoBehaviour
     public int minEnemies = 5;
     [UDictionary.Split(30, 70)] public SpellsDict spellsDict;
 
+    public int keys;
+    public TextMeshProUGUI keysTextMeshPro;
+    public TextMeshProUGUI healthTextMeshPro;
+    public TextMeshProUGUI strengthTextMeshPro;
+
     private void Awake()
     {
         Instance = this;
@@ -22,6 +29,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    public void SetCurrentRoom(Room room)
+    {
+        currentRoom.blackMask.enabled = true;
+        currentRoom = room;
     }
     
     [Serializable] public class SpellsDict : UDictionary<string, Spells> {}

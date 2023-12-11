@@ -170,6 +170,8 @@ MonoBehaviour:
     maxNormalAngle: 0
   force: 200
   rb: {fileID: 755570420898888913}
+  keyPrefab: {fileID: 7287175252053400152, guid: e289d1af1c0f5b04996d62a0716ab2cf, type: 3}
+  keyDropRate: 0
   bossMove: {fileID: 0}
   spiderPrefab: {fileID: 2473475278717355894}
   maxFamilyCount: 2

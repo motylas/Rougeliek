@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DungeonTilemap_0
+      name: wallUp_0
       rect:
         serializedVersion: 2
         x: 16
@@ -138,7 +138,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_1
+      name: wallUp_1
       rect:
         serializedVersion: 2
         x: 32
@@ -159,7 +159,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_2
+      name: cornerUpLeft_0
       rect:
         serializedVersion: 2
         x: 64
@@ -180,7 +180,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_3
+      name: cornerUpLeft_1
       rect:
         serializedVersion: 2
         x: 80
@@ -201,7 +201,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_4
+      name: cornerUpLeft_2
       rect:
         serializedVersion: 2
         x: 96
@@ -348,7 +348,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_11
+      name: wallUp_2
       rect:
         serializedVersion: 2
         x: 16
@@ -369,7 +369,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_12
+      name: wallUp_3
       rect:
         serializedVersion: 2
         x: 32
@@ -390,7 +390,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_13
+      name: cornerUpLeft_3
       rect:
         serializedVersion: 2
         x: 64
@@ -411,7 +411,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_14
+      name: cornerUpLeft_4
       rect:
         serializedVersion: 2
         x: 80
@@ -432,7 +432,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_15
+      name: cornerUpLeft_5
       rect:
         serializedVersion: 2
         x: 96
@@ -600,7 +600,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_23
+      name: wallUp_4
       rect:
         serializedVersion: 2
         x: 16
@@ -621,7 +621,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_24
+      name: wallUp_5
       rect:
         serializedVersion: 2
         x: 32
@@ -642,7 +642,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_25
+      name: cornerUpLeft_6
       rect:
         serializedVersion: 2
         x: 64
@@ -663,7 +663,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_26
+      name: cornerUpLeft_7
       rect:
         serializedVersion: 2
         x: 80
@@ -684,7 +684,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_27
+      name: cornerUpLeft_8
       rect:
         serializedVersion: 2
         x: 96
@@ -1797,7 +1797,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_80
+      name: cornerDownRight_0
       rect:
         serializedVersion: 2
         x: 224
@@ -1818,7 +1818,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_81
+      name: cornerDownRight_1
       rect:
         serializedVersion: 2
         x: 240
@@ -1839,7 +1839,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_82
+      name: cornerDownRight_2
       rect:
         serializedVersion: 2
         x: 256
@@ -1860,7 +1860,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_83
+      name: wallDown_0
       rect:
         serializedVersion: 2
         x: 288
@@ -1881,7 +1881,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_84
+      name: wallDown_1
       rect:
         serializedVersion: 2
         x: 304
@@ -2070,7 +2070,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_93
+      name: cornerDownRight_3
       rect:
         serializedVersion: 2
         x: 224
@@ -2091,7 +2091,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_94
+      name: cornerDownRight_4
       rect:
         serializedVersion: 2
         x: 240
@@ -2112,7 +2112,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_95
+      name: cornerDownRight_5
       rect:
         serializedVersion: 2
         x: 256
@@ -2133,7 +2133,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_96
+      name: wallDown_2
       rect:
         serializedVersion: 2
         x: 288
@@ -2154,7 +2154,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_97
+      name: wallDown_3
       rect:
         serializedVersion: 2
         x: 304
@@ -2301,7 +2301,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_104
+      name: cornerDownRight_6
       rect:
         serializedVersion: 2
         x: 224
@@ -2322,7 +2322,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_105
+      name: cornerDownRight_7
       rect:
         serializedVersion: 2
         x: 240
@@ -2343,7 +2343,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_106
+      name: cornerDownRight_8
       rect:
         serializedVersion: 2
         x: 256
@@ -2364,7 +2364,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_107
+      name: wallDown_4
       rect:
         serializedVersion: 2
         x: 288
@@ -2385,7 +2385,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_108
+      name: wallDown_5
       rect:
         serializedVersion: 2
         x: 304
@@ -2406,7 +2406,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_109
+      name: wallRight_0
       rect:
         serializedVersion: 2
         x: 336
@@ -2427,7 +2427,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_110
+      name: wallRight_1
       rect:
         serializedVersion: 2
         x: 352
@@ -2448,7 +2448,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_111
+      name: wallRight_2
       rect:
         serializedVersion: 2
         x: 368
@@ -2511,7 +2511,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_114
+      name: wallRight_3
       rect:
         serializedVersion: 2
         x: 336
@@ -2532,7 +2532,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_115
+      name: wallRight_4
       rect:
         serializedVersion: 2
         x: 352
@@ -2553,7 +2553,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_116
+      name: wallRight_5
       rect:
         serializedVersion: 2
         x: 368
@@ -2826,7 +2826,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_129
+      name: cornerDownLeft_0
       rect:
         serializedVersion: 2
         x: 32
@@ -2847,7 +2847,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_130
+      name: cornerDownLeft_1
       rect:
         serializedVersion: 2
         x: 48
@@ -2868,7 +2868,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_131
+      name: cornerDownLeft_2
       rect:
         serializedVersion: 2
         x: 64
@@ -3141,7 +3141,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_144
+      name: cornerUpRight_0
       rect:
         serializedVersion: 2
         x: 336
@@ -3162,7 +3162,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_145
+      name: cornerUpRight_1
       rect:
         serializedVersion: 2
         x: 352
@@ -3183,7 +3183,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_146
+      name: cornerUpRight_2
       rect:
         serializedVersion: 2
         x: 368
@@ -3204,7 +3204,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_147
+      name: cornerDownLeft_3
       rect:
         serializedVersion: 2
         x: 32
@@ -3225,7 +3225,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_148
+      name: cornerDownLeft_4
       rect:
         serializedVersion: 2
         x: 48
@@ -3246,7 +3246,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_149
+      name: cornerDownLeft_5
       rect:
         serializedVersion: 2
         x: 64
@@ -3519,7 +3519,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_162
+      name: cornerUpRight_3
       rect:
         serializedVersion: 2
         x: 336
@@ -3540,7 +3540,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_163
+      name: cornerUpRight_4
       rect:
         serializedVersion: 2
         x: 352
@@ -3561,7 +3561,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_164
+      name: cornerUpRight_5
       rect:
         serializedVersion: 2
         x: 368
@@ -3582,7 +3582,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_165
+      name: cornerDownLeft_6
       rect:
         serializedVersion: 2
         x: 32
@@ -3603,7 +3603,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_166
+      name: cornerDownLeft_7
       rect:
         serializedVersion: 2
         x: 48
@@ -3624,7 +3624,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_167
+      name: cornerDownLeft_8
       rect:
         serializedVersion: 2
         x: 64
@@ -3897,7 +3897,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_180
+      name: cornerUpRight_6
       rect:
         serializedVersion: 2
         x: 336
@@ -3918,7 +3918,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_181
+      name: cornerUpRight_7
       rect:
         serializedVersion: 2
         x: 352
@@ -3939,7 +3939,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_182
+      name: cornerUpRight_8
       rect:
         serializedVersion: 2
         x: 368
@@ -4212,7 +4212,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_195
+      name: wallLeft_0
       rect:
         serializedVersion: 2
         x: 32
@@ -4233,7 +4233,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_196
+      name: wallLeft_1
       rect:
         serializedVersion: 2
         x: 48
@@ -4254,7 +4254,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_197
+      name: wallLeft_2
       rect:
         serializedVersion: 2
         x: 64
@@ -4569,7 +4569,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_212
+      name: wallLeft_3
       rect:
         serializedVersion: 2
         x: 32
@@ -4590,7 +4590,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_213
+      name: wallLeft_4
       rect:
         serializedVersion: 2
         x: 48
@@ -4611,7 +4611,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DungeonTilemap_214
+      name: wallLeft_5
       rect:
         serializedVersion: 2
         x: 64
@@ -4766,7 +4766,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4787,7 +4787,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4808,7 +4808,7 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4832,104 +4832,108 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       DungeonTilemap_176: 1588645808
-      DungeonTilemap_146: -1188596233
-      DungeonTilemap_148: 1907511387
+      DungeonTilemap_172: -1802847797
       DungeonTilemap_193: 658193274
       DungeonTilemap_75: -1622488788
       DungeonTilemap_41: -43709329
-      DungeonTilemap_107: 497488223
-      DungeonTilemap_13: 85846137
       DungeonTilemap_156: -1478399194
-      DungeonTilemap_80: 1978555225
       DungeonTilemap_170: -198970449
+      cornerUpRight_8: 433480286
       DungeonTilemap_20: -23595597
-      DungeonTilemap_172: -1802847797
-      DungeonTilemap_2: 1067654650
+      cornerUpRight_3: 1490012248
       DungeonTilemap_54: 635543172
-      DungeonTilemap_110: -741481659
-      DungeonTilemap_83: 833367201
       DungeonTilemap_102: 1702228215
       DungeonTilemap_101: -77752153
       DungeonTilemap_151: -905603307
       DungeonTilemap_152: -2014767323
       DungeonTilemap_142: -1500495459
+      cornerDownLeft_5: -1329227429
       DungeonTilemap_60: -1169039981
       DungeonTilemap_48: -1209787700
       DungeonTilemap_161: -1536792770
+      wallDown_4: 497488223
       DungeonTilemap_71: -1880512282
-      DungeonTilemap_116: 298553845
+      wallUp_2: 1285032417
       DungeonTilemap_87: -306116586
       DungeonTilemap_63: -1610944979
       DungeonTilemap_45: 1506900673
-      DungeonTilemap_82: -1595631003
       door_2: -1732031912
       DungeonTilemap_5: -2058716458
       DungeonTilemap_202: 265015655
       DungeonTilemap_194: 1212442335
       DungeonTilemap_141: 1192719147
       DungeonTilemap_177: -1661449914
+      cornerDownLeft_3: -1388328643
       DungeonTilemap_43: 364496714
+      cornerUpLeft_6: 1161241307
       DungeonTilemap_34: -822247879
       DungeonTilemap_210: 705620354
+      wallLeft_5: 2102786319
       DungeonTilemap_159: -1407803844
+      cornerDownRight_3: 358424388
       DungeonTilemap_175: -1726695847
+      wallLeft_4: 55594161
       DungeonTilemap_44: -1834679614
       DungeonTilemap_203: -717485418
+      wallLeft_0: 1647653279
       DungeonTilemap_189: 1995440295
       DungeonTilemap_150: 1474514478
+      cornerUpLeft_4: -1198529984
       DungeonTilemap_22: -1718956891
       DungeonTilemap_38: 99314194
       DungeonTilemap_171: -1400153120
+      wallUp_5: 789334095
+      wallUp_1: -41163737
       DungeonTilemap_79: 406217743
       DungeonTilemap_42: 1380898338
       DungeonTilemap_155: -1633448111
-      DungeonTilemap_108: 1409973504
+      cornerUpLeft_5: 1692752414
+      wallDown_2: 1842082843
       DungeonTilemap_65: 382065249
-      DungeonTilemap_97: -1158991472
+      wallRight_3: 305078872
+      cornerDownRight_4: -1868647396
       DungeonTilemap_157: 2105284606
       DungeonTilemap_118: -1229060183
+      cornerDownLeft_2: 496192912
       DungeonTilemap_191: -1649202562
       DungeonTilemap_99: -2008084745
-      DungeonTilemap_165: -1077025036
       door_3: 901790697
       DungeonTilemap_103: 1738406559
-      DungeonTilemap_58: -1079378064
       DungeonTilemap_204: 669517472
-      DungeonTilemap_212: -428356687
-      DungeonTilemap_26: -643629261
+      DungeonTilemap_58: -1079378064
+      cornerUpRight_5: -2025140792
+      cornerDownLeft_8: 77710022
       DungeonTilemap_179: -89990354
-      DungeonTilemap_149: -1329227429
-      DungeonTilemap_125: 2057848324
-      DungeonTilemap_138: 1915817652
+      wallRight_0: 1537915119
       DungeonTilemap_128: -242382011
+      DungeonTilemap_125: 2057848324
       DungeonTilemap_127: -1198873500
-      DungeonTilemap_49: -239705084
+      DungeonTilemap_138: 1915817652
       DungeonTilemap_139: 589931167
+      DungeonTilemap_49: -239705084
       DungeonTilemap_113: -1347181916
+      wallDown_1: 2063517597
       DungeonTilemap_33: 2069321366
       DungeonTilemap_72: 1061176985
       DungeonTilemap_70: -2010520572
       DungeonTilemap_17: 1553803932
-      DungeonTilemap_1: -41163737
-      DungeonTilemap_147: -1388328643
+      cornerDownRight_6: -1411740693
+      cornerDownLeft_0: 60689656
       DungeonTilemap_209: 93089911
+      cornerUpRight_4: -1760784343
       DungeonTilemap_207: -579089762
       DungeonTilemap_66: -719021616
       DungeonTilemap_133: 1706882633
       DungeonTilemap_121: 955325667
-      DungeonTilemap_195: 1647653279
       DungeonTilemap_119: 235330879
-      DungeonTilemap_23: -997683915
+      cornerUpRight_6: 1772245335
+      wallUp_4: -997683915
       DungeonTilemap_187: -1878752842
-      DungeonTilemap_111: 569369759
       DungeonTilemap_208: -1875087402
       DungeonTilemap_153: 1553881008
-      DungeonTilemap_94: -1868647396
-      DungeonTilemap_115: 87700721
-      DungeonTilemap_214: 2102786319
       DungeonTilemap_55: 1689983625
-      DungeonTilemap_114: 305078872
       DungeonTilemap_186: 701745992
+      wallLeft_3: -428356687
       DungeonTilemap_86: 1833741231
       DungeonTilemap_28: 1832115238
       DungeonTilemap_88: 1004259968
@@ -4942,95 +4946,86 @@ TextureImporter:
       DungeonTilemap_183: 237297238
       DungeonTilemap_19: -2003147403
       door_1: 1915672915
-      DungeonTilemap_95: 714956002
+      wallRight_1: -741481659
       DungeonTilemap_140: 1524760388
-      DungeonTilemap_105: -1735751431
-      DungeonTilemap_4: 386883343
-      DungeonTilemap_25: 1161241307
-      DungeonTilemap_96: 1842082843
+      cornerDownRight_8: 1754519819
+      wallLeft_1: 620462678
+      wallDown_0: 833367201
       DungeonTilemap_30: -531801759
       DungeonTilemap_29: 746329745
       DungeonTilemap_61: 1883743770
-      DungeonTilemap_129: 60689656
       DungeonTilemap_39: -332560758
       DungeonTilemap_62: 1571357523
-      DungeonTilemap_84: 2063517597
       DungeonTilemap_185: -2037822351
       DungeonTilemap_200: 205649453
-      DungeonTilemap_144: 1204388296
+      cornerUpLeft_3: 85846137
       DungeonTilemap_67: 1751418106
       DungeonTilemap_77: -302192884
-      DungeonTilemap_24: 789334095
-      DungeonTilemap_213: 55594161
       DungeonTilemap_178: -1501816074
       DungeonTilemap_123: -1916694
-      DungeonTilemap_162: 1490012248
       DungeonTilemap_68: -2061900042
-      DungeonTilemap_182: 433480286
+      cornerDownLeft_1: -1078198549
       DungeonTilemap_47: -265637823
-      DungeonTilemap_145: -596068877
       DungeonTilemap_21: -1901159489
       DungeonTilemap_91: -2085217550
       DungeonTilemap_217: -768415124
       DungeonTilemap_64: -169521099
-      DungeonTilemap_0: -794624642
-      DungeonTilemap_163: -1760784343
-      DungeonTilemap_27: -1933410594
       door_5: -1199666605
       DungeonTilemap_69: -1407023630
-      DungeonTilemap_106: 1754519819
-      DungeonTilemap_167: 77710022
+      cornerDownLeft_7: 1969668764
       DungeonTilemap_188: 1941409173
       DungeonTilemap_6: 81430795
       DungeonTilemap_134: 2057231151
       DungeonTilemap_7: -1638952262
+      cornerUpLeft_1: -1624057282
+      wallRight_4: 87700721
       DungeonTilemap_154: 367543398
+      cornerDownLeft_4: 1907511387
       DungeonTilemap_78: 561735060
-      DungeonTilemap_15: 1692752414
       DungeonTilemap_53: 1751932600
+      wallDown_5: 1409973504
       DungeonTilemap_215: 508774995
       DungeonTilemap_46: -405948136
       DungeonTilemap_89: -590739307
+      cornerDownRight_7: -1735751431
+      cornerDownRight_5: 714956002
       DungeonTilemap_211: 848285928
+      cornerUpLeft_2: 386883343
       DungeonTilemap_160: 1955777449
-      DungeonTilemap_130: -1078198549
-      DungeonTilemap_81: -1063931185
-      DungeonTilemap_197: -1278544456
+      cornerUpRight_7: -104793544
       DungeonTilemap_51: 308214299
+      cornerUpRight_1: -596068877
       DungeonTilemap_85: -376030069
       DungeonTilemap_76: 2034872614
-      DungeonTilemap_174: -481583152
       DungeonTilemap_199: 1497264300
       DungeonTilemap_120: 345944564
       DungeonTilemap_198: -1762604838
       DungeonTilemap_216: 774398350
-      DungeonTilemap_12: -677158977
+      DungeonTilemap_174: -481583152
+      wallRight_5: 298553845
       DungeonTilemap_137: -841357081
       door_0: -370958050
       door_4: 574541124
       DungeonTilemap_59: -1485018365
+      DungeonTilemap_192: 1499118325
       DungeonTilemap_117: 1155802320
       DungeonTilemap_92: -1045910535
-      DungeonTilemap_180: 1772245335
-      DungeonTilemap_11: 1285032417
-      DungeonTilemap_192: 1499118325
       DungeonTilemap_98: 123373437
       DungeonTilemap_57: 942997443
+      wallLeft_2: -1278544456
       DungeonTilemap_135: -1462322201
       DungeonTilemap_206: -1670014583
-      DungeonTilemap_109: 1537915119
-      DungeonTilemap_93: 358424388
+      cornerUpRight_2: -1188596233
+      wallDown_3: -1158991472
       DungeonTilemap_52: -1586290587
       DungeonTilemap_40: -1136863634
-      DungeonTilemap_3: -1624057282
       DungeonTilemap_9: -106148263
-      DungeonTilemap_196: 620462678
       DungeonTilemap_16: -995235310
-      DungeonTilemap_104: -1411740693
+      cornerDownRight_2: -1595631003
+      cornerDownRight_1: -1063931185
       DungeonTilemap_32: 1015840576
-      DungeonTilemap_181: -104793544
       DungeonTilemap_190: -1416264269
-      DungeonTilemap_164: -2025140792
+      cornerDownRight_0: 1978555225
       DungeonTilemap_132: -472050107
       DungeonTilemap_74: 1590417072
       DungeonTilemap_143: -17688811
@@ -5040,19 +5035,24 @@ TextureImporter:
       DungeonTilemap_158: 1550296493
       DungeonTilemap_37: 1550119870
       DungeonTilemap_73: -899849229
-      DungeonTilemap_14: -1198529984
-      DungeonTilemap_56: -490972223
+      cornerDownLeft_6: -1077025036
       DungeonTilemap_100: -854258186
+      DungeonTilemap_56: -490972223
+      wallUp_3: -677158977
       DungeonTilemap_112: -1665294011
+      cornerUpLeft_0: 1067654650
+      wallRight_2: 569369759
       DungeonTilemap_18: -1559868809
       DungeonTilemap_136: 1427418103
       DungeonTilemap_31: 1345582663
       DungeonTilemap_36: 453709314
-      DungeonTilemap_166: 1969668764
+      cornerUpLeft_8: -1933410594
       DungeonTilemap_122: 418622710
+      wallUp_0: -794624642
+      cornerUpLeft_7: -643629261
+      cornerUpRight_0: 1204388296
       DungeonTilemap_35: -1596750251
       DungeonTilemap_50: 371139938
-      DungeonTilemap_131: 496192912
       DungeonTilemap_90: -305535906
       DungeonTilemap_126: 1904476891
   spritePackingTag: 

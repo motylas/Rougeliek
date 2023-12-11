@@ -40,6 +40,12 @@ public class Boss : Enemy
             spiderTwo.maxHealth = maxHealth / 2;
             spiderTwo.Animator.speed *= 1.3f;
         }
+
+        if (maxFamilyCount == familyCount)
+        {
+            keyDropRate = 0.5;
+        }
+        
         
         base.Die();
     }

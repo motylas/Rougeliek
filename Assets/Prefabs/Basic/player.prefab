@@ -272,5 +272,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0accd39963d4ebf83fab4bd4869666e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionArea: 5
+  visionArea: 8
   wallCollider: {fileID: 431984559}
+  contactFilter2D:
+    useTriggers: 1
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 1966848
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0

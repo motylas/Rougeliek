@@ -1,10 +1,12 @@
 using System.Collections;
+using System.Globalization;
 using UnityEngine;
 
 public class PlayerFight : MonoBehaviour
 {
     // Variables used when player receives damage that can be modified
-    [SerializeField] private int hp = 6;
+    public int hp = 6;
+    public float strength = 1;
     [SerializeField] private float playersImmortalityTime = 1f;
     
     // Variables used when damage is received
@@ -19,6 +21,8 @@ public class PlayerFight : MonoBehaviour
     {
         _ability = gameObject.AddComponent<StarterAbility>();
         ReceiveDamageSetup();
+        GameManager.Instance.strengthTextMeshPro.text = strength.ToString(CultureInfo.InvariantCulture);
+        GameManager.Instance.healthTextMeshPro.text = hp.ToString();
     }
     
     private void Update()

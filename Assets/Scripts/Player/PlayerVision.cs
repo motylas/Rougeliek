@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// TODO ADD VISION TO DOORS AND WALLS
 // TODO ADD VISION TO ENEMIES
 // TODO REMAKE SKELETON
+// TODO WEAPONS
+// TODO REPAIR MASS AND FORCE
 public class PlayerVision : MonoBehaviour
 {
     [SerializeField] private float visionArea;
@@ -17,11 +18,14 @@ public class PlayerVision : MonoBehaviour
     private Color _basicColor;
     private Color _seenColor;
     private Color _blackColor;
+    private Color _transparentColor;
+    private Color _seenTransparencyColor;
 
     private List<SpriteRenderer> _rocksList;
     private List<SpriteRenderer> _boxesList;
     private List<SpriteRenderer> _bushesList;
     private List<SpriteRenderer> _floorList;
+    private List<SpriteRenderer> _wallsList;
     private readonly List<RaycastHit2D> _raycastHit2Ds = new();
     [SerializeField] private ContactFilter2D contactFilter2D;
 
@@ -32,6 +36,8 @@ public class PlayerVision : MonoBehaviour
         _basicColor = Color.white;
         _seenColor = new Color(0.2f, 0.2f, 0.2f, 1);
         _blackColor = Color.black;
+        _transparentColor = new Color(0f, 0f, 0f, 0);
+        _seenTransparencyColor = new Color(0f, 0f, 0f, 0.8f);
     }
 
 
@@ -49,6 +55,7 @@ public class PlayerVision : MonoBehaviour
         _boxesList = _currentRoom.boxesList;
         _bushesList = _currentRoom.bushesList;
         _floorList = _currentRoom.floorsList;
+        _wallsList = _currentRoom.wallsList;
 
         // SET COLOR
         
@@ -56,6 +63,7 @@ public class PlayerVision : MonoBehaviour
         SetColor(_boxesList, _blackColor);
         SetColor(_bushesList, _blackColor);
         SetColor(_floorList, _blackColor);
+        SetColor(_wallsList, _blackColor);
     }
 
     private IEnumerator RayTracing()
@@ -66,6 +74,7 @@ public class PlayerVision : MonoBehaviour
             SetColorDistance(_boxesList, _seenColor);
             SetColorDistance(_bushesList, _seenColor);
             SetColorDistance(_floorList, _seenColor);
+            SetColorDistance(_wallsList, _seenTransparencyColor);
             HideEnemies();
             HideProjectiles();
             var raysToCast = 360;
@@ -83,8 +92,13 @@ public class PlayerVision : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Projectile"))
                         hit.collider.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                    else if (hit.collider.CompareTag("WallV"))
+                    {
+                        hit.collider.gameObject.GetComponent<SpriteRenderer>().color = _transparentColor;
+                    }
                     else
                     {
+                        
                         hit.collider.gameObject.GetComponent<SpriteRenderer>().color = _basicColor;
                         if (showFloor) break;
                         if (hit.collider.CompareTag("RockV")) showFloor = true;
@@ -113,7 +127,7 @@ public class PlayerVision : MonoBehaviour
     {
         foreach (var sprite in GameManager.Instance.projectilesList)
         {
-            sprite.enabled = false;
+            if (sprite) sprite.enabled = false;
         }
     }
 
@@ -125,6 +139,7 @@ public class PlayerVision : MonoBehaviour
         SetColor(_rocksList, _basicColor);
         SetColor(_boxesList, _basicColor);
         SetColor(_bushesList, _basicColor);
+        SetColor(_wallsList, _transparentColor);
     }
 
     private void SetColor(List<SpriteRenderer> obstaclesList, Color color)
@@ -140,6 +155,7 @@ public class PlayerVision : MonoBehaviour
         foreach (var sprite in obstaclesList)
         {
             if (sprite.color == _basicColor) sprite.color = color;
+            if (sprite.color == _transparentColor) sprite.color = color;
         }
     }
 
