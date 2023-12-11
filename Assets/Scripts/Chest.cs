@@ -8,7 +8,7 @@ public class Chest : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private Sprite chestOpen;
     private bool isOpen = false;
-    [SerializeField] private List<PowerUps> powerUpsList;
+    [SerializeField] private List<PowerUp> powerUpsList;
     [SerializeField] private List<Ability> abilitiesList;
 
     private void Start()

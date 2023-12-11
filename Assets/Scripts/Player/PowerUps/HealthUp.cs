@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class HealthUp : PowerUps
+public class HealthUp : PowerUp
 {
     private void OnTriggerStay2D(Collider2D other)
     {

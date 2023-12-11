@@ -16,11 +16,14 @@ public class FollowerFollowing : EnemyState
     private Transform colliderTransform;
     private float colliderRadius;
     private int layerMask;
+    private int playerLayerMask;
 
     // Path Find
     [SerializeField] private CircleCollider2D circleCollider2D;
     private List<Vector2> followPath = new();
     private Coroutine _pathFind;
+
+    private bool playerSeen;
 
     private void Start()
     {
@@ -32,17 +35,21 @@ public class FollowerFollowing : EnemyState
         colliderTransform = circleCollider2D.transform;
         colliderRadius = circleCollider2D.radius;
         layerMask = LayerMask.GetMask("WallBodyColl") | LayerMask.GetMask("Player");
+        playerLayerMask = LayerMask.GetMask("RockV") | LayerMask.GetMask("BushV") | LayerMask.GetMask("Player");
+
     }
 
     public override void OnEnterState()
     {
         _pathFind = StartCoroutine(FindPathToPlayer());
+        StartCoroutine(PlayerSeen());
     }
 
     public override EnemyState OnUpdateState()
     {
         var playerPosition = (Vector2)_player.transform.position;
         var followerPosition = (Vector2)colliderTransform.position;
+        if (!playerSeen) return _follower.searchingState;
         if (Vector2.Distance(playerPosition, followerPosition) > _follower.chaseArea) return _follower.searchingState;
 
         _moveDirection = (playerPosition - followerPosition).normalized;
@@ -63,7 +70,7 @@ public class FollowerFollowing : EnemyState
 
     public override void OnLeaveState()
     {
-        StopCoroutine(_pathFind);
+        StopAllCoroutines();
         var state = (FollowerSearch)_follower.searchingState;
         state.playerLastSeen = _player.wallCollider.position;
     }
@@ -77,5 +84,29 @@ public class FollowerFollowing : EnemyState
             yield return new WaitForSeconds(0.1f);
         }
         // ReSharper disable once IteratorNeverReturns
+    }
+    
+    private IEnumerator PlayerSeen()
+    {
+        playerSeen = false;
+        var raysToCast = 360;
+        var angle = 0f;
+        var angleIncrease = 360f / raysToCast;
+        for (var i = 0; i < raysToCast; i++)
+        {
+            var angleRad = angle * (Mathf.PI / 180f);
+            var direction = new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+            var hit = Physics2D.Raycast(_follower.circleCollider2D.transform.position, direction, _follower.chaseArea,
+                playerLayerMask);
+            if (!hit)
+            {
+                Debug.DrawLine(_follower.circleCollider2D.transform.position, _follower.circleCollider2D.transform.position+direction*_follower.chaseArea, Color.blue);
+                continue;
+            }
+            Debug.DrawLine(_follower.circleCollider2D.transform.position, hit.point, Color.blue);
+            if (hit.collider.CompareTag("Player")) playerSeen = true;
+            angle -= angleIncrease;
+        }
+        yield return new WaitForSeconds(0.02f);
     }
 }

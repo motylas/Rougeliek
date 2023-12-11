@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class StrengthUp : PowerUps
+public class StrengthUp : PowerUp
 {
     private void OnTriggerStay2D(Collider2D other)
     {
